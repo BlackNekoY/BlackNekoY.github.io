@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="a,b,c">
+  <meta name="keywords" content="debug">
 
 
 
@@ -80,27 +80,27 @@
 
 
 <meta name="description" content="深入代码调试原理-QG VSCode篇slim  前言Debugger按端大致分为vscode插件端和Server端，插件端主要负责，打开被调试工程，Socket连接Server通信，显示来自Server端的调试数据。Server端主要负责，监听端口等待vscode端连接，并在断点断住的时候传输调试数据给vscode端。  1 Debugger的整体架构1.1 基本结构vscode将整个调">
-<meta name="keywords" content="a,b,c">
+<meta name="keywords" content="debug">
 <meta property="og:type" content="article">
-<meta property="og:title" content="深入代码调试原理-vscode篇">
-<meta property="og:url" content="http://yoursite.com/2019/01/24/深入代码调试原理-vscode篇/index.html">
+<meta property="og:title" content="深入代码调试原理 - vscode篇">
+<meta property="og:url" content="http://yoursite.com/2018/12/29/深入代码调试原理-vscode篇/index.html">
 <meta property="og:site_name" content="Slim&#39;s Blog">
 <meta property="og:description" content="深入代码调试原理-QG VSCode篇slim  前言Debugger按端大致分为vscode插件端和Server端，插件端主要负责，打开被调试工程，Socket连接Server通信，显示来自Server端的调试数据。Server端主要负责，监听端口等待vscode端连接，并在断点断住的时候传输调试数据给vscode端。  1 Debugger的整体架构1.1 基本结构vscode将整个调">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://yoursite.com/2019/01/24/深入代码调试原理-vscode篇/debug-extension-api.png">
-<meta property="og:image" content="http://yoursite.com/2019/01/24/深入代码调试原理-vscode篇/vscode_debugger_ui.png">
-<meta property="og:image" content="http://yoursite.com/2019/01/24/深入代码调试原理-vscode篇/JSDWP协议.png">
-<meta property="og:image" content="http://yoursite.com/2019/01/24/深入代码调试原理-vscode篇/plantuml_debug_protocol.png">
-<meta property="og:image" content="http://yoursite.com/2019/01/24/深入代码调试原理-vscode篇/start_debug.png">
-<meta property="og:image" content="http://yoursite.com/2019/01/24/深入代码调试原理-vscode篇/plantuml_debug_adapter_events.png">
-<meta property="og:image" content="http://yoursite.com/2019/01/24/深入代码调试原理-vscode篇/stack_frames.jpg">
-<meta property="og:image" content="http://yoursite.com/2019/01/24/深入代码调试原理-vscode篇/scopes.jpg">
-<meta property="og:image" content="http://yoursite.com/2019/01/24/深入代码调试原理-vscode篇/debugging.jpg">
-<meta property="og:updated_time" content="2019-01-24T09:12:03.701Z">
+<meta property="og:image" content="http://yoursite.com/2018/12/29/深入代码调试原理-vscode篇/debug-extension-api.png">
+<meta property="og:image" content="http://yoursite.com/2018/12/29/深入代码调试原理-vscode篇/vscode_debugger_ui.png">
+<meta property="og:image" content="http://yoursite.com/2018/12/29/深入代码调试原理-vscode篇/JSDWP协议.png">
+<meta property="og:image" content="http://yoursite.com/2018/12/29/深入代码调试原理-vscode篇/plantuml_debug_protocol.png">
+<meta property="og:image" content="http://yoursite.com/2018/12/29/深入代码调试原理-vscode篇/start_debug.png">
+<meta property="og:image" content="http://yoursite.com/2018/12/29/深入代码调试原理-vscode篇/plantuml_debug_adapter_events.png">
+<meta property="og:image" content="http://yoursite.com/2018/12/29/深入代码调试原理-vscode篇/stack_frames.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/12/29/深入代码调试原理-vscode篇/scopes.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/12/29/深入代码调试原理-vscode篇/debugging.jpg">
+<meta property="og:updated_time" content="2019-01-24T09:32:13.522Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="深入代码调试原理-vscode篇">
+<meta name="twitter:title" content="深入代码调试原理 - vscode篇">
 <meta name="twitter:description" content="深入代码调试原理-QG VSCode篇slim  前言Debugger按端大致分为vscode插件端和Server端，插件端主要负责，打开被调试工程，Socket连接Server通信，显示来自Server端的调试数据。Server端主要负责，监听端口等待vscode端连接，并在断点断住的时候传输调试数据给vscode端。  1 Debugger的整体架构1.1 基本结构vscode将整个调">
-<meta name="twitter:image" content="http://yoursite.com/2019/01/24/深入代码调试原理-vscode篇/debug-extension-api.png">
+<meta name="twitter:image" content="http://yoursite.com/2018/12/29/深入代码调试原理-vscode篇/debug-extension-api.png">
 
 
 
@@ -130,13 +130,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/01/24/深入代码调试原理-vscode篇/">
+  <link rel="canonical" href="http://yoursite.com/2018/12/29/深入代码调试原理-vscode篇/">
 
 
 
 
 
-  <title>深入代码调试原理-vscode篇 | Slim's Blog</title>
+  <title>深入代码调试原理 - vscode篇 | Slim's Blog</title>
   
 
 
@@ -243,7 +243,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/24/深入代码调试原理-vscode篇/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/29/深入代码调试原理-vscode篇/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Slim">
@@ -260,7 +260,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">深入代码调试原理-vscode篇</h1>
+          <h1 class="post-title" itemprop="name headline">深入代码调试原理 - vscode篇</h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-24T17:08:26+08:00">
-                2019-01-24
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-29T14:57:26+08:00">
+                2018-12-29
               </time>
             
 
@@ -318,11 +318,11 @@
 <blockquote>
 <p><font size="5"><strong>前言</strong></font><br>Debugger按端大致分为vscode插件端和Server端，插件端主要负责，打开被调试工程，Socket连接Server通信，显示来自Server端的调试数据。Server端主要负责，监听端口等待vscode端连接，并在断点断住的时候传输调试数据给vscode端。</p>
 </blockquote>
-<h2 id="1-Debugger的整体架构"><a href="#1-Debugger的整体架构" class="headerlink" title="1 Debugger的整体架构"></a>1 Debugger的整体架构</h2><h3 id="1-1-基本结构"><a href="#1-1-基本结构" class="headerlink" title="1.1 基本结构"></a>1.1 基本结构</h3><p><img src="/2019/01/24/深入代码调试原理-vscode篇/debug-extension-api.png" alt=""><br>vscode将整个调试器分为3个角色，<strong>Debugger UI</strong>、<strong>DebugAdapter</strong>、<strong>Debugger</strong>。</p>
+<h2 id="1-Debugger的整体架构"><a href="#1-Debugger的整体架构" class="headerlink" title="1 Debugger的整体架构"></a>1 Debugger的整体架构</h2><h3 id="1-1-基本结构"><a href="#1-1-基本结构" class="headerlink" title="1.1 基本结构"></a>1.1 基本结构</h3><p><img src="/2018/12/29/深入代码调试原理-vscode篇/debug-extension-api.png" alt=""><br>vscode将整个调试器分为3个角色，<strong>Debugger UI</strong>、<strong>DebugAdapter</strong>、<strong>Debugger</strong>。</p>
 <ul>
 <li><p><strong>Debugger</strong><br>真正的调试器，掌管程序的状态和控制着程序的执行：<strong>在断点处断住程序</strong>，<strong>获取变量的值</strong>，<strong>获取当前栈帧</strong>，对于调试不同的语言，有不同的实现。比如在JAVA中，该角色就是JAVA虚拟机。在JavaScriptCore中，就是<code>JSC::Debugger</code>。</p>
 </li>
-<li><p><strong>Vscode Debugger UI</strong><br>vscode提供给开发者的调试界面，用户可以通过UI操作：点击continue、step、查看变量的值，发送命令给DebugAdapter。<br><img src="/2019/01/24/深入代码调试原理-vscode篇/vscode_debugger_ui.png" alt=""></p>
+<li><p><strong>Vscode Debugger UI</strong><br>vscode提供给开发者的调试界面，用户可以通过UI操作：点击continue、step、查看变量的值，发送命令给DebugAdapter。<br><img src="/2018/12/29/深入代码调试原理-vscode篇/vscode_debugger_ui.png" alt=""></p>
 </li>
 <li><p><strong>DebugAdapter</strong><br>开发者编写的插件，分别和UI、Debugger通信：</p>
 <ul>
@@ -331,14 +331,14 @@
 </ul>
 </li>
 </ul>
-<h3 id="1-2-通信协议"><a href="#1-2-通信协议" class="headerlink" title="1.2 通信协议"></a>1.2 通信协议</h3><h4 id="1-2-1-DebugAdapter和Debugger的通信协议"><a href="#1-2-1-DebugAdapter和Debugger的通信协议" class="headerlink" title="1.2.1 DebugAdapter和Debugger的通信协议"></a>1.2.1 DebugAdapter和Debugger的通信协议</h4><p>DebugAdapter和Debugger的通信协议是和Java调试协议（JDWP）类似，所有命令前4个字节为数据长度，紧跟着为具体数据，而数据的格式是JSON。命令体没有JDWP那样复杂。<br><img src="/2019/01/24/深入代码调试原理-vscode篇/JSDWP协议.png" alt=""><br>比如设置断点协议：<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"id"</span>: <span class="number">1</span>,</span><br><span class="line">  <span class="attr">"domain"</span>: <span class="string">"Debugger"</span>,</span><br><span class="line">  <span class="attr">"commands"</span>: &#123;</span><br><span class="line">    <span class="attr">"name"</span>: <span class="string">"SetBreakpointByUrl"</span>,</span><br><span class="line">    <span class="attr">"parameters"</span>: [&#123;</span><br><span class="line">      <span class="attr">"proj_dir"</span>:<span class="string">"blabla-game"</span>,</span><br><span class="line">      <span class="attr">"lineNumber"</span>: <span class="number">73</span>,</span><br><span class="line">      <span class="attr">"url"</span>: <span class="string">"BoxRotate.js"</span></span><br><span class="line">    &#125;]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="1-2-通信协议"><a href="#1-2-通信协议" class="headerlink" title="1.2 通信协议"></a>1.2 通信协议</h3><h4 id="1-2-1-DebugAdapter和Debugger的通信协议"><a href="#1-2-1-DebugAdapter和Debugger的通信协议" class="headerlink" title="1.2.1 DebugAdapter和Debugger的通信协议"></a>1.2.1 DebugAdapter和Debugger的通信协议</h4><p>DebugAdapter和Debugger的通信协议是和Java调试协议（JDWP）类似，所有命令前4个字节为数据长度，紧跟着为具体数据，而数据的格式是JSON。命令体没有JDWP那样复杂。<br><img src="/2018/12/29/深入代码调试原理-vscode篇/JSDWP协议.png" alt=""><br>比如设置断点协议：<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"id"</span>: <span class="number">1</span>,</span><br><span class="line">  <span class="attr">"domain"</span>: <span class="string">"Debugger"</span>,</span><br><span class="line">  <span class="attr">"commands"</span>: &#123;</span><br><span class="line">    <span class="attr">"name"</span>: <span class="string">"SetBreakpointByUrl"</span>,</span><br><span class="line">    <span class="attr">"parameters"</span>: [&#123;</span><br><span class="line">      <span class="attr">"proj_dir"</span>:<span class="string">"blabla-game"</span>,</span><br><span class="line">      <span class="attr">"lineNumber"</span>: <span class="number">73</span>,</span><br><span class="line">      <span class="attr">"url"</span>: <span class="string">"BoxRotate.js"</span></span><br><span class="line">    &#125;]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p><a href="https://www.ibm.com/developerworks/cn/java/j-lo-jpda3/index.html" target="_blank" rel="noopener">Java调试协议JDWP详解</a></p>
 <h4 id="1-2-2-DebugAdapter和vscode-UI的通信协议"><a href="#1-2-2-DebugAdapter和vscode-UI的通信协议" class="headerlink" title="1.2.2 DebugAdapter和vscode UI的通信协议"></a>1.2.2 DebugAdapter和vscode UI的通信协议</h4><p>与vscode ui的通信由vscode规范化的通信协议<code>DebugProtocol</code>定义，里面主要定义了三种数据类型，<code>ProtocolMessage</code>，<code>Arguments</code>，<code>Model</code>。<br><strong>ProtocolMessage</strong>：定义了一套请求-回包(Request - Response)体系：</p>
 <pre><code>1. Debugger UI 需要什么数据，就会dispatch具体的Request给DebugAdapter，带上参数（Arguments）。
 2. DebugAdapter收到Request，就将数据放入对应Response的body，回复给UI。
 3. 如果Adapter需要通知UI状态改变，通过发送Event实现。
-</code></pre><p><strong>Arguments</strong>：参数类型，不同Request需要不同的Arguments，统一以XXXArguments命名。<br><strong>Model</strong>：这里的Model其实是vscode对于数据类型的封装，并不是一个统一接口。<br>比如栈帧：<code>StackFrame</code>，断点：<code>BreakPoint</code>，变量：<code>Variable</code><br><img src="/2019/01/24/深入代码调试原理-vscode篇/plantuml_debug_protocol.png" alt=""></p>
-<h2 id="2-事件序列"><a href="#2-事件序列" class="headerlink" title="2 事件序列"></a>2 事件序列</h2><p>调试过程中的各种事件通过各种Request - Response - Event进行传递，最开始的调试命令是由用户点击绿色箭头开始的。<br><img src="/2019/01/24/深入代码调试原理-vscode篇/start_debug.png" alt=""><br><img src="/2019/01/24/深入代码调试原理-vscode篇/plantuml_debug_adapter_events.png" alt=""></p>
+</code></pre><p><strong>Arguments</strong>：参数类型，不同Request需要不同的Arguments，统一以XXXArguments命名。<br><strong>Model</strong>：这里的Model其实是vscode对于数据类型的封装，并不是一个统一接口。<br>比如栈帧：<code>StackFrame</code>，断点：<code>BreakPoint</code>，变量：<code>Variable</code><br><img src="/2018/12/29/深入代码调试原理-vscode篇/plantuml_debug_protocol.png" alt=""></p>
+<h2 id="2-事件序列"><a href="#2-事件序列" class="headerlink" title="2 事件序列"></a>2 事件序列</h2><p>调试过程中的各种事件通过各种Request - Response - Event进行传递，最开始的调试命令是由用户点击绿色箭头开始的。<br><img src="/2018/12/29/深入代码调试原理-vscode篇/start_debug.png" alt=""><br><img src="/2018/12/29/深入代码调试原理-vscode篇/plantuml_debug_adapter_events.png" alt=""></p>
 <h3 id="2-1-初始化（Initialization）"><a href="#2-1-初始化（Initialization）" class="headerlink" title="2.1 初始化（Initialization）"></a>2.1 初始化（Initialization）</h3><p>在初始化阶段，Adapter从收到<code>initializeRequest</code>开始，到<code>send LaunchReponse</code>结束，Adapter和Debugger主要做以下事情。</p>
 <ul>
 <li><strong>自定义初始化参数</strong><br>在<code>initializeRequest</code>中，自定义<code>InitializeResponse</code>中参数实现定制化，比如：<strong>是否允许setVariable</strong>、<strong>是否允许条件断点</strong>等。</li>
@@ -354,11 +354,11 @@
 <h3 id="2-2-运行（Running）"><a href="#2-2-运行（Running）" class="headerlink" title="2.2 运行（Running）"></a>2.2 运行（Running）</h3><p>在启动成功后，JS工程成功运行，如果有加断点，则会发起<code>SetBreakPointsRequest</code>，该方法的<code>args.breakpoints</code>会带上有断点文件的所有断点信息，例如断点的所在文件的文件名、绝对路径、行数。（如果有多个文件则调用多次，每次调用携带的是一个文件的断点信息），Adapter需要将这些文件名和行号等信息，一一告诉给Debugger就好了。</p>
 <h3 id="2-3-程序被断住（Breaking）"><a href="#2-3-程序被断住（Breaking）" class="headerlink" title="2.3 程序被断住（Breaking）"></a>2.3 程序被断住（Breaking）</h3><p>Debugger在拿到全部的断点信息后会缓存起来，当JavaScirptCore运行到断点处时，会断住程序并通知Debugger，Debugger则会将当前的栈帧序列给到Adapter。Adapter则会发送<code>StoppedEvent</code>告诉UI改变状态。UI接着会向Adapter请求需要的信息</p>
 <ul>
-<li><strong>请求栈帧信息（StackFrames）</strong><br>Debugger在将栈帧信息返回的时候已经包含了栈帧列表，js代码中进入一个方法则该方法压栈，出一个方法则该方法出栈，所以栈帧列表中包含的就是经过的所有方法。Adapter将拿到的栈帧信息编号序号后，返回以<code>DebugProtocol</code>定义的<code>StackFrame</code>结构体数组。<br><img src="/2019/01/24/深入代码调试原理-vscode篇/stack_frames.jpg" alt=""></li>
-<li><strong>请求变量范围（Scopes）</strong><br>VscodeUI 拿到栈帧信息后，需要确认每个栈帧的变量有多少范围，如上图所说，通常每个栈帧的变量分为Local和Global，vscode会将这些不同种类的变量分开显示。<br> <img src="/2019/01/24/深入代码调试原理-vscode篇/scopes.jpg" alt=""></li>
+<li><strong>请求栈帧信息（StackFrames）</strong><br>Debugger在将栈帧信息返回的时候已经包含了栈帧列表，js代码中进入一个方法则该方法压栈，出一个方法则该方法出栈，所以栈帧列表中包含的就是经过的所有方法。Adapter将拿到的栈帧信息编号序号后，返回以<code>DebugProtocol</code>定义的<code>StackFrame</code>结构体数组。<br><img src="/2018/12/29/深入代码调试原理-vscode篇/stack_frames.jpg" alt=""></li>
+<li><strong>请求变量范围（Scopes）</strong><br>VscodeUI 拿到栈帧信息后，需要确认每个栈帧的变量有多少范围，如上图所说，通常每个栈帧的变量分为Local和Global，vscode会将这些不同种类的变量分开显示。<br> <img src="/2018/12/29/深入代码调试原理-vscode篇/scopes.jpg" alt=""></li>
 <li><strong>请求变量的值（Variable）</strong><br>当鼠标点击展开某个变量时，vscode会将这个变量的id通过<code>variablesRequestArgument</code>带下来，Adapter会向Debugger请求该变量的信息。vscode将变量分为<strong>可展开</strong> 和 <strong>不可展开</strong>的，可展开的变量说明是一个Object，不可展开的变量说明只是一个基本数据类型。Adapter拿到变量的值后将其以<code>DebugProtocol</code>定义的<code>Variable</code>形式返回。</li>
 </ul>
-<h3 id="2-4-调试阶段（Debugging）"><a href="#2-4-调试阶段（Debugging）" class="headerlink" title="2.4 调试阶段（Debugging）"></a>2.4 调试阶段（Debugging）</h3><p>程序一旦被断下来，UI更新后，vscode就进入了调试模式，vscode提供了很多入口供开发者操作，开发者通过鼠标点击来触发对应的Request。<br><img src="/2019/01/24/深入代码调试原理-vscode篇/debugging.jpg" alt=""></p>
+<h3 id="2-4-调试阶段（Debugging）"><a href="#2-4-调试阶段（Debugging）" class="headerlink" title="2.4 调试阶段（Debugging）"></a>2.4 调试阶段（Debugging）</h3><p>程序一旦被断下来，UI更新后，vscode就进入了调试模式，vscode提供了很多入口供开发者操作，开发者通过鼠标点击来触发对应的Request。<br><img src="/2018/12/29/深入代码调试原理-vscode篇/debugging.jpg" alt=""></p>
 <h3 id="2-5-断开调试（Disconnect）"><a href="#2-5-断开调试（Disconnect）" class="headerlink" title="2.5 断开调试（Disconnect）"></a>2.5 断开调试（Disconnect）</h3><p>开发者点击stop按钮断开调试，与初始化模式相反，该阶段需要告诉Debugger调试程序已经退出、断开ADB和Socket等操作。</p>
 
       
@@ -384,8 +384,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/01/24/深入代码调试原理-server篇/" rel="next" title="[Debugger] - 深入代码调试原理 - server篇">
-                <i class="fa fa-chevron-left"></i> [Debugger] - 深入代码调试原理 - server篇
+              <a href="/2017/10/31/OpenGL-5-实现一个能自由移动的摄像机/" rel="next" title="OpenGL(5) - 实现一个能自由移动的摄像机">
+                <i class="fa fa-chevron-left"></i> OpenGL(5) - 实现一个能自由移动的摄像机
               </a>
             
           </div>
@@ -393,6 +393,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/11/深入代码调试原理-server篇/" rel="prev" title="深入代码调试原理 - server篇">
+                深入代码调试原理 - server篇 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -469,7 +473,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

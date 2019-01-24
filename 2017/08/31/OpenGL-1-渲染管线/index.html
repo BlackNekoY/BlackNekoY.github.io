@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="a,b,c">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="OpenGL(1) - 渲染管线OpenGL ES2.x渲染管线 VertexShader顶点着色器，由外部程序传入顶点原始信息至顶点着色器中，一般在里面计算出最终顶点位置、颜色等各项顶点属性信息，然后将其传递给图元装配阶段。每个顶点执行一次。 attribute 0~n：外部程序传入的变量，每个顶点都独有一份。uniforms：外部程序传入的常量数据，同一个3D物体的所有顶点共有一份。s">
+<meta name="keywords" content="a,b,c">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OpenGL(1) - 渲染管线">
+<meta property="og:url" content="http://yoursite.com/2017/08/31/OpenGL-1-渲染管线/index.html">
+<meta property="og:site_name" content="Slim&#39;s Blog">
+<meta property="og:description" content="OpenGL(1) - 渲染管线OpenGL ES2.x渲染管线 VertexShader顶点着色器，由外部程序传入顶点原始信息至顶点着色器中，一般在里面计算出最终顶点位置、颜色等各项顶点属性信息，然后将其传递给图元装配阶段。每个顶点执行一次。 attribute 0~n：外部程序传入的变量，每个顶点都独有一份。uniforms：外部程序传入的常量数据，同一个3D物体的所有顶点共有一份。s">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/2017/08/31/OpenGL-1-渲染管线/渲染管线.png">
+<meta property="og:image" content="http://yoursite.com/2017/08/31/OpenGL-1-渲染管线/顶点着色器.png">
+<meta property="og:image" content="http://yoursite.com/2017/08/31/OpenGL-1-渲染管线/varying插值计算.png">
+<meta property="og:image" content="http://yoursite.com/2017/08/31/OpenGL-1-渲染管线/图元装配.png">
+<meta property="og:image" content="http://yoursite.com/2017/08/31/OpenGL-1-渲染管线/光栅化.png">
+<meta property="og:image" content="http://yoursite.com/2017/08/31/OpenGL-1-渲染管线/视景体.png">
+<meta property="og:image" content="http://yoursite.com/2017/08/31/OpenGL-1-渲染管线/光栅化1.png">
+<meta property="og:image" content="http://yoursite.com/2017/08/31/OpenGL-1-渲染管线/片元着色器.png">
+<meta property="og:updated_time" content="2019-01-24T10:12:08.192Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="OpenGL(1) - 渲染管线">
+<meta name="twitter:description" content="OpenGL(1) - 渲染管线OpenGL ES2.x渲染管线 VertexShader顶点着色器，由外部程序传入顶点原始信息至顶点着色器中，一般在里面计算出最终顶点位置、颜色等各项顶点属性信息，然后将其传递给图元装配阶段。每个顶点执行一次。 attribute 0~n：外部程序传入的变量，每个顶点都独有一份。uniforms：外部程序传入的常量数据，同一个3D物体的所有顶点共有一份。s">
+<meta name="twitter:image" content="http://yoursite.com/2017/08/31/OpenGL-1-渲染管线/渲染管线.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/08/31/OpenGL-1-渲染管线/">
+
+
+
+
+
+  <title>OpenGL(1) - 渲染管线 | Slim's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Slim's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/31/OpenGL-1-渲染管线/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Slim">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Slim's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">OpenGL(1) - 渲染管线</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-31T21:12:30+08:00">
+                2017-08-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p class="description"></p>
+
+<p><img src="" class="img-topic"></p>
+<p><br></p>
+<h1 id="OpenGL-1-渲染管线"><a href="#OpenGL-1-渲染管线" class="headerlink" title="OpenGL(1) - 渲染管线"></a>OpenGL(1) - 渲染管线</h1><h3 id="OpenGL-ES2-x渲染管线"><a href="#OpenGL-ES2-x渲染管线" class="headerlink" title="OpenGL ES2.x渲染管线"></a>OpenGL ES2.x渲染管线</h3><p><img src="/2017/08/31/OpenGL-1-渲染管线/渲染管线.png" alt=""></p>
+<h3 id="VertexShader"><a href="#VertexShader" class="headerlink" title="VertexShader"></a>VertexShader</h3><p>顶点着色器，由外部程序传入顶点原始信息至顶点着色器中，一般在里面计算出最终顶点位置、颜色等各项顶点属性信息，然后将其传递给图元装配阶段。每个顶点执行一次。</p>
+<p><img src="/2017/08/31/OpenGL-1-渲染管线/顶点着色器.png" alt=""><br>attribute 0~n：外部程序传入的变量，每个顶点都独有一份。<br>uniforms：外部程序传入的常量数据，同一个3D物体的所有顶点共有一份。<br>samplers：这个是可选的，一种特殊的 Uniforms ，表示顶点着色器使用的纹理。<br>varying 0~n：顶点着色器计算出传递给片元着色器的变量，但是这个变量并不是直接将赋的值送入片元着色器中，而是根据每个顶点对此易变变量的赋值情况和片元与顶点的位置关系，经过插值计算后，再传递给片元。</p>
+<p><img src="/2017/08/31/OpenGL-1-渲染管线/varying插值计算.png" alt=""></p>
+<h3 id="图元装配"><a href="#图元装配" class="headerlink" title="图元装配"></a>图元装配</h3><p><img src="/2017/08/31/OpenGL-1-渲染管线/图元装配.png" alt=""><br>经过着色器处理之后的顶点在图元装配阶段被装配为基本图元，图元是一个能用OpenGL ES绘图命令绘制的几何体，绘图命令指定了一组顶点属性，描述了图元的几何形状和图元类型，OpenGL ES 支持三种基本图元：点，线和三角形，它们是可被 OpenGL ES 渲染的。<br>图元处理最重要的工作为<strong>剪裁</strong>，它将在可视区域外的图元丢弃，可视区域是由摄像机位置和投影位置产生的6个平面的视景体决定的。其中，近平面为投影平面。</p>
+<h3 id="光栅化"><a href="#光栅化" class="headerlink" title="光栅化"></a>光栅化</h3><p><img src="/2017/08/31/OpenGL-1-渲染管线/光栅化.png" alt=""></p>
+<p><strong>投影</strong><br>由于显示设备都是二维的，所以需要将上一步剪裁得到的3D物体投影到近平面上。</p>
+<p><img src="/2017/08/31/OpenGL-1-渲染管线/视景体.png" alt=""></p>
+<p><strong>光栅化</strong></p>
+<p><img src="/2017/08/31/OpenGL-1-渲染管线/光栅化1.png" alt=""></p>
+<p>将由各个顶点形成的几何物体，经过一系列变换后，形成一个个离散化的小单元，这个小单元被称为片元，每个片元对应帧缓冲的一个像素，但是在3D世界中物体是会相互遮挡的，这点在每个片元中也存在，每个通过对比每个片元的深度属性，深度低的会覆盖掉深度高的片元，所以最终在屏幕上显示的像素为最上面片元的像素。</p>
+<h3 id="FragmentShader"><a href="#FragmentShader" class="headerlink" title="FragmentShader"></a>FragmentShader</h3><p>片元着色器，若干个顶点经过顶点着色器-&gt;图元装配-&gt;光栅化后，得到了若干个片元，每个片元执行一次，在里面可以进行纹理的采样，颜色的汇总。计算出最终颜色赋值给内建变量。</p>
+<p><img src="/2017/08/31/OpenGL-1-渲染管线/片元着色器.png" alt=""><br>varying 0~n：从顶点着色器传递到片元着色器的变量，如上所说，是经过插值化后的变量。<br>gl_FragColor：内建变量，指该片元的颜色</p>
+<p>注：容易看出，片元着色器运行的次数是远远大于顶点着色器的，所以如果某些重复的运算最好在顶点着色器中完成，避免影响执行效率。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/09/02/OpenGL-2-着色语言/" rel="prev" title="OpenGL(2) - 着色语言">
+                OpenGL(2) - 着色语言 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Slim</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#OpenGL-1-渲染管线"><span class="nav-number">1.</span> <span class="nav-text">OpenGL(1) - 渲染管线</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#OpenGL-ES2-x渲染管线"><span class="nav-number">1.0.1.</span> <span class="nav-text">OpenGL ES2.x渲染管线</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#VertexShader"><span class="nav-number">1.0.2.</span> <span class="nav-text">VertexShader</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#图元装配"><span class="nav-number">1.0.3.</span> <span class="nav-text">图元装配</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#光栅化"><span class="nav-number">1.0.4.</span> <span class="nav-text">光栅化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#FragmentShader"><span class="nav-number">1.0.5.</span> <span class="nav-text">FragmentShader</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Slim</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

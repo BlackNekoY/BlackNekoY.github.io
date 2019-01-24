@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="a,b,c">
+  <meta name="keywords" content="debug">
 
 
 
@@ -80,23 +80,23 @@
 
 
 <meta name="description" content="深入代码调试原理-server篇slim 1.理解JSCore的Debugger整体架构1.1 JSC的Debugger层先来看一下JSCore对外提供的Debugger框架： 1.1.1 JSC::Debugger (JSC的调试接口)JSCore对外暴露的调试接口，主要用于开发者连接/断开（attach&amp;amp;detach）Debugger、设置断点、通过continue step">
-<meta name="keywords" content="a,b,c">
+<meta name="keywords" content="debug">
 <meta property="og:type" content="article">
-<meta property="og:title" content="[Debugger] - 深入代码调试原理 - server篇">
-<meta property="og:url" content="http://yoursite.com/2019/01/24/深入代码调试原理-server篇/index.html">
+<meta property="og:title" content="深入代码调试原理 - server篇">
+<meta property="og:url" content="http://yoursite.com/2019/01/11/深入代码调试原理-server篇/index.html">
 <meta property="og:site_name" content="Slim&#39;s Blog">
 <meta property="og:description" content="深入代码调试原理-server篇slim 1.理解JSCore的Debugger整体架构1.1 JSC的Debugger层先来看一下JSCore对外提供的Debugger框架： 1.1.1 JSC::Debugger (JSC的调试接口)JSCore对外暴露的调试接口，主要用于开发者连接/断开（attach&amp;amp;detach）Debugger、设置断点、通过continue step">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://yoursite.com/2019/01/24/深入代码调试原理-server篇/plantuml_jsc_package.png">
-<meta property="og:image" content="http://yoursite.com/2019/01/24/深入代码调试原理-server篇/plantuml_jsc_breakpoint.png">
-<meta property="og:image" content="http://yoursite.com/2019/01/24/深入代码调试原理-server篇/plantuml_jsc_source_provider.png">
-<meta property="og:image" content="http://yoursite.com/2019/01/24/深入代码调试原理-server篇/2019-01-08-16-43-58.png">
-<meta property="og:image" content="http://yoursite.com/2019/01/24/深入代码调试原理-server篇/plantuml_jsdebugger.png">
-<meta property="og:updated_time" content="2019-01-24T09:12:08.509Z">
+<meta property="og:image" content="http://yoursite.com/2019/01/11/深入代码调试原理-server篇/plantuml_jsc_package.png">
+<meta property="og:image" content="http://yoursite.com/2019/01/11/深入代码调试原理-server篇/plantuml_jsc_breakpoint.png">
+<meta property="og:image" content="http://yoursite.com/2019/01/11/深入代码调试原理-server篇/plantuml_jsc_source_provider.png">
+<meta property="og:image" content="http://yoursite.com/2019/01/11/深入代码调试原理-server篇/2019-01-08-16-43-58.png">
+<meta property="og:image" content="http://yoursite.com/2019/01/11/深入代码调试原理-server篇/plantuml_jsdebugger.png">
+<meta property="og:updated_time" content="2019-01-24T09:32:59.404Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="[Debugger] - 深入代码调试原理 - server篇">
+<meta name="twitter:title" content="深入代码调试原理 - server篇">
 <meta name="twitter:description" content="深入代码调试原理-server篇slim 1.理解JSCore的Debugger整体架构1.1 JSC的Debugger层先来看一下JSCore对外提供的Debugger框架： 1.1.1 JSC::Debugger (JSC的调试接口)JSCore对外暴露的调试接口，主要用于开发者连接/断开（attach&amp;amp;detach）Debugger、设置断点、通过continue step">
-<meta name="twitter:image" content="http://yoursite.com/2019/01/24/深入代码调试原理-server篇/plantuml_jsc_package.png">
+<meta name="twitter:image" content="http://yoursite.com/2019/01/11/深入代码调试原理-server篇/plantuml_jsc_package.png">
 
 
 
@@ -126,13 +126,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/01/24/深入代码调试原理-server篇/">
+  <link rel="canonical" href="http://yoursite.com/2019/01/11/深入代码调试原理-server篇/">
 
 
 
 
 
-  <title>[Debugger] - 深入代码调试原理 - server篇 | Slim's Blog</title>
+  <title>深入代码调试原理 - server篇 | Slim's Blog</title>
   
 
 
@@ -239,7 +239,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/24/深入代码调试原理-server篇/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/11/深入代码调试原理-server篇/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Slim">
@@ -256,7 +256,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">[Debugger] - 深入代码调试原理 - server篇</h1>
+          <h1 class="post-title" itemprop="name headline">深入代码调试原理 - server篇</h1>
         
 
         <div class="post-meta">
@@ -268,8 +268,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-24T16:50:45+08:00">
-                2019-01-24
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-11T14:33:42+08:00">
+                2019-01-11
               </time>
             
 
@@ -311,15 +311,15 @@
 <p><img src="" class="img-topic"></p>
 <p><br></p>
 <h1 id="深入代码调试原理-server篇"><a href="#深入代码调试原理-server篇" class="headerlink" title="深入代码调试原理-server篇"></a>深入代码调试原理-server篇</h1><p><em>slim</em></p>
-<h2 id="1-理解JSCore的Debugger整体架构"><a href="#1-理解JSCore的Debugger整体架构" class="headerlink" title="1.理解JSCore的Debugger整体架构"></a>1.理解JSCore的Debugger整体架构</h2><h3 id="1-1-JSC的Debugger层"><a href="#1-1-JSC的Debugger层" class="headerlink" title="1.1 JSC的Debugger层"></a>1.1 JSC的Debugger层</h3><p>先来看一下JSCore对外提供的Debugger框架：<br><img src="/2019/01/24/深入代码调试原理-server篇/plantuml_jsc_package.png" alt=""></p>
+<h2 id="1-理解JSCore的Debugger整体架构"><a href="#1-理解JSCore的Debugger整体架构" class="headerlink" title="1.理解JSCore的Debugger整体架构"></a>1.理解JSCore的Debugger整体架构</h2><h3 id="1-1-JSC的Debugger层"><a href="#1-1-JSC的Debugger层" class="headerlink" title="1.1 JSC的Debugger层"></a>1.1 JSC的Debugger层</h3><p>先来看一下JSCore对外提供的Debugger框架：<br><img src="/2019/01/11/深入代码调试原理-server篇/plantuml_jsc_package.png" alt=""></p>
 <h4 id="1-1-1-JSC-Debugger-JSC的调试接口"><a href="#1-1-1-JSC-Debugger-JSC的调试接口" class="headerlink" title="1.1.1 JSC::Debugger (JSC的调试接口)"></a>1.1.1 JSC::Debugger (JSC的调试接口)</h4><p>JSCore对外暴露的调试接口，主要用于开发者连接/断开（attach&amp;detach）Debugger、设置断点、通过<code>continue</code> <code>step</code> 对断住的程序进行控制，以及当断点触发后，子类收到的回调方法。</p>
-<p><strong>连接</strong>：通过调用<code>attach(JSGlobalObject*)</code>连接到Debugger，让程序具有调试能力。同样也有对应的<code>detach(JSGlobalObject*, ReasonForDetach)</code>方法断开连接。<br><strong>断点</strong>：调用<code>BreakpointID setBreakpoint(Breakpoint&amp;)</code>方法给Debugger设置断点，<code>JSC::Breakpoint</code>有文件的<code>sourceID</code>、行号等信息。<br><img src="/2019/01/24/深入代码调试原理-server篇/plantuml_jsc_breakpoint.png" alt=""></p>
-<p><strong>各种调试方法</strong>：<code>continue</code>、<code>stepXXX</code>，都是当断点停下后的调试方法。<br><strong>留给子类实现</strong>：<br><code>sourceParsed(SourceProvider)</code>：当调试程序attach上Debugger后，会传入一个<code>JSGlobalObject</code>，<code>VM</code>会从其中读取到运行的JS文件,进行一个sourceID和文件的匹配，将这些每个文件匹配的结果保存在这个<code>SourceProvider</code>中并分发给子类使用。<br><img src="/2019/01/24/深入代码调试原理-server篇/plantuml_jsc_source_provider.png" alt=""></p>
-<p><img src="/2019/01/24/深入代码调试原理-server篇/2019-01-08-16-43-58.png" alt=""></p>
+<p><strong>连接</strong>：通过调用<code>attach(JSGlobalObject*)</code>连接到Debugger，让程序具有调试能力。同样也有对应的<code>detach(JSGlobalObject*, ReasonForDetach)</code>方法断开连接。<br><strong>断点</strong>：调用<code>BreakpointID setBreakpoint(Breakpoint&amp;)</code>方法给Debugger设置断点，<code>JSC::Breakpoint</code>有文件的<code>sourceID</code>、行号等信息。<br><img src="/2019/01/11/深入代码调试原理-server篇/plantuml_jsc_breakpoint.png" alt=""></p>
+<p><strong>各种调试方法</strong>：<code>continue</code>、<code>stepXXX</code>，都是当断点停下后的调试方法。<br><strong>留给子类实现</strong>：<br><code>sourceParsed(SourceProvider)</code>：当调试程序attach上Debugger后，会传入一个<code>JSGlobalObject</code>，<code>VM</code>会从其中读取到运行的JS文件,进行一个sourceID和文件的匹配，将这些每个文件匹配的结果保存在这个<code>SourceProvider</code>中并分发给子类使用。<br><img src="/2019/01/11/深入代码调试原理-server篇/plantuml_jsc_source_provider.png" alt=""></p>
+<p><img src="/2019/01/11/深入代码调试原理-server篇/2019-01-08-16-43-58.png" alt=""></p>
 <p><code>handlePause(JSGlobalObject*, ReasonForPause)</code>：程序pause会触发的回调，<code>ReasonForPause</code>说明了pause的原因。<br><code>handleBreakPointHit(JSGlobalObject*,Breakpoint&amp;)</code>:命中断点的回调。如果是命中断点导致程序pause，则上下两个方法都会调用。</p>
 <h4 id="1-1-2-Inspector-ScriptDebugServer-（JSC对Debugger的包装）"><a href="#1-1-2-Inspector-ScriptDebugServer-（JSC对Debugger的包装）" class="headerlink" title="1.1.2 Inspector:ScriptDebugServer （JSC对Debugger的包装）"></a>1.1.2 Inspector:ScriptDebugServer （JSC对Debugger的包装）</h4><p>如果不直接继承<code>Debugger</code>，JSCore也提供了<code>ScriptDebugServer</code>这个封装类，该类继承自<code>Debugger</code>，实现了Debugger留给子类的方法，进行了一些处理。并采取注册Listener的形式将这些方法重新dispatch出去，留给开发者实现的<code>ScriptDebugListener</code>接口更加方便好用。</p>
 <p><strong>dispatch方法</strong><br><code>dispatchDidParseSource(ListenerSet&amp; listeners, JSC::SourceProvider*)</code>：<code>sourceParsed</code>对应的dispatch方法，该方法会将<code>SourceProvider</code>的JS文件信息都取出来，封装成<code>ScriptDebugListener::Script</code>，最终调用<code>ScriptDebugListener.didParseSource(JSC::SourceID, Script&amp;)</code>给Listener。<br>其余的dispatch方法大都类似，都是回调到Listener的相关接口。</p>
-<h3 id="1-2-QG的Debug层"><a href="#1-2-QG的Debug层" class="headerlink" title="1.2 QG的Debug层"></a>1.2 QG的Debug层</h3><p><img src="/2019/01/24/深入代码调试原理-server篇/plantuml_jsdebugger.png" alt=""></p>
+<h3 id="1-2-QG的Debug层"><a href="#1-2-QG的Debug层" class="headerlink" title="1.2 QG的Debug层"></a>1.2 QG的Debug层</h3><p><img src="/2019/01/11/深入代码调试原理-server篇/plantuml_jsdebugger.png" alt=""></p>
 <h4 id="1-2-1-JSDebuggerImpl-（QG-Debugger的实现类）"><a href="#1-2-1-JSDebuggerImpl-（QG-Debugger的实现类）" class="headerlink" title="1.2.1 JSDebuggerImpl （QG Debugger的实现类）"></a>1.2.1 JSDebuggerImpl （QG Debugger的实现类）</h4><ul>
 <li>同时继承自<code>ScriptDebugServer</code>和<code>ScriptDebugListener</code>，除了重写方法外，对外暴露<code>Attach</code>&amp;<code>Detach</code>接口，将自己<code>addListener</code>到Server中。</li>
 <li>JSDebuggerImpl中有一个JSGlobalObject，Debugger的sourceParsed就是用这个取sourceProvider。</li>
@@ -415,14 +415,18 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2018/12/29/深入代码调试原理-vscode篇/" rel="next" title="深入代码调试原理 - vscode篇">
+                <i class="fa fa-chevron-left"></i> 深入代码调试原理 - vscode篇
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/01/24/深入代码调试原理-vscode篇/" rel="prev" title="深入代码调试原理-vscode篇">
-                深入代码调试原理-vscode篇 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/01/24/OpenGL-4-投影和摄像机/[OpenGL] (4) - 投影和摄像机/" rel="prev" title="">
+                 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -500,7 +504,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

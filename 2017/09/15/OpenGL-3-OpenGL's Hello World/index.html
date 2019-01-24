@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="a,b,c">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="OpenGL(3) - OpenGL’s Hello World1.编写GLSL程序着色器是通过glsl语言编写的，各个平台统一，实现了一次编写，到处使用。在Android中，glsl程序一般有两种书写方式：  单独写成文件，放在/app/assets/ 文件夹下，后缀名为glsl，在代码中通过Resource读取内容。 12345678910// vertex.glsluniform m">
+<meta name="keywords" content="a,b,c">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OpenGL(3) - OpenGL&#39;s Hello World">
+<meta property="og:url" content="http://yoursite.com/2017/09/15/OpenGL-3-OpenGL's Hello World/index.html">
+<meta property="og:site_name" content="Slim&#39;s Blog">
+<meta property="og:description" content="OpenGL(3) - OpenGL’s Hello World1.编写GLSL程序着色器是通过glsl语言编写的，各个平台统一，实现了一次编写，到处使用。在Android中，glsl程序一般有两种书写方式：  单独写成文件，放在/app/assets/ 文件夹下，后缀名为glsl，在代码中通过Resource读取内容。 12345678910// vertex.glsluniform m">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-01-24T10:12:48.782Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="OpenGL(3) - OpenGL&#39;s Hello World">
+<meta name="twitter:description" content="OpenGL(3) - OpenGL’s Hello World1.编写GLSL程序着色器是通过glsl语言编写的，各个平台统一，实现了一次编写，到处使用。在Android中，glsl程序一般有两种书写方式：  单独写成文件，放在/app/assets/ 文件夹下，后缀名为glsl，在代码中通过Resource读取内容。 12345678910// vertex.glsluniform m">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/09/15/OpenGL-3-OpenGL's Hello World/">
+
+
+
+
+
+  <title>OpenGL(3) - OpenGL's Hello World | Slim's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Slim's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/15/OpenGL-3-OpenGL's Hello World/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Slim">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Slim's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">OpenGL(3) - OpenGL's Hello World</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-09-15T17:50:36+08:00">
+                2017-09-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p class="description"></p>
+
+<p><img src="" class="img-topic"></p>
+<p><br></p>
+<h1 id="OpenGL-3-OpenGL’s-Hello-World"><a href="#OpenGL-3-OpenGL’s-Hello-World" class="headerlink" title="OpenGL(3) - OpenGL’s Hello World"></a>OpenGL(3) - OpenGL’s Hello World</h1><h3 id="1-编写GLSL程序"><a href="#1-编写GLSL程序" class="headerlink" title="1.编写GLSL程序"></a>1.编写GLSL程序</h3><p>着色器是通过glsl语言编写的，各个平台统一，实现了一次编写，到处使用。在Android中，glsl程序一般有两种书写方式：</p>
+<ul>
+<li><p>单独写成文件，放在/app/assets/ 文件夹下，后缀名为glsl，在代码中通过Resource读取内容。</p>
+<figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// vertex.glsl</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">uniform</span> <span class="type">mat4</span> uMVPMatrix;</span><br><span class="line"><span class="keyword">attribute</span> <span class="type">vec3</span> aPosition;</span><br><span class="line"><span class="keyword">attribute</span> <span class="type">vec4</span> aColor;</span><br><span class="line"><span class="keyword">varying</span> <span class="type">vec4</span> vColor;</span><br><span class="line"><span class="type">void</span> main() &#123;</span><br><span class="line">    <span class="built_in">gl_Position</span> = uMVPMatrix * <span class="type">vec4</span>(aPosition, <span class="number">1</span>);</span><br><span class="line">    vColor = aColor;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在代码中通过字符串拼接生成final的shader代码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> String VERTEX_SHADER_CODE =</span><br><span class="line">          <span class="string">"uniform mat4 uMVPMatrix;\n"</span> +</span><br><span class="line">          <span class="string">"attribute vec3 aPosition;\n"</span> +</span><br><span class="line">          <span class="string">"attribute vec2 aTexturePos;\n"</span> +  <span class="comment">//传给顶点着色器的纹理坐标</span></span><br><span class="line">          <span class="string">"varying vec2 vTexturePos;\n"</span> +     <span class="comment">//传给片元着色器的纹理坐标</span></span><br><span class="line">          <span class="string">"void main() &#123;\n"</span> +</span><br><span class="line">          <span class="string">"    gl_Position = uMVPMatrix * vec4(aPosition, 1);\n"</span> +</span><br><span class="line">          <span class="string">"    vTexturePos = aTexturePos;\n"</span> +</span><br><span class="line">          <span class="string">"&#125;"</span>;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="2-创建着色器程序的工具类"><a href="#2-创建着色器程序的工具类" class="headerlink" title="2.创建着色器程序的工具类"></a>2.创建着色器程序的工具类</h3><p>通用方法，写成工具类。一般在GLSurfaceView的onCreate中或者在可以被draw的Model类中调用。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ShaderUtil.java</span></span><br><span class="line"> <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 创建着色器程序</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> vertexSource 顶点着色器源代码</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> fragmentSource 片元着色器源代码</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 程序id</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">createProgram</span><span class="params">(String vertexSource, String fragmentSource)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//加载顶点着色器和片元着色器</span></span><br><span class="line">        <span class="keyword">int</span> vertexShader = loadShader(GLES20.GL_VERTEX_SHADER, vertexSource);</span><br><span class="line">        <span class="keyword">if</span>(vertexShader == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> fragmentShader = loadShader(GLES20.GL_FRAGMENT_SHADER, fragmentSource);</span><br><span class="line">        <span class="keyword">if</span>(fragmentShader == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//创建着色器程序并attach着色器</span></span><br><span class="line">        <span class="keyword">int</span> program = GLES20.glCreateProgram(); </span><br><span class="line">        <span class="keyword">if</span>(program != <span class="number">0</span>) &#123;</span><br><span class="line">            GLES20.glAttachShader(program, vertexShader);</span><br><span class="line">            checkGlError(<span class="string">"glAttachShader"</span>);</span><br><span class="line">            GLES20.glAttachShader(program, fragmentShader);</span><br><span class="line">            checkGlError(<span class="string">"glAttachShader"</span>);</span><br><span class="line">            GLES20.glLinkProgram(program);</span><br><span class="line">            <span class="keyword">int</span>[] linkStatus = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">1</span>];</span><br><span class="line">            GLES20.glGetProgramiv(program, GLES20.GL_LINK_STATUS, linkStatus, <span class="number">0</span>);</span><br><span class="line">            <span class="keyword">if</span>(linkStatus[<span class="number">0</span>] != GLES20.GL_TRUE) &#123;</span><br><span class="line">                Log.e(TAG, <span class="string">"link program error:"</span> + GLES20.glGetProgramInfoLog(program));</span><br><span class="line">                program = <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> program;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line"> <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 加载着色器</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> shaderType 着色器类型</span></span><br><span class="line"><span class="comment">     *                   &lt;p&gt;GLES20.GL_VERTEX_SHADER:顶点着色器</span></span><br><span class="line"><span class="comment">     *                   &lt;p&gt;GLES20.GL_FRAGMENT_SHADER:片元着色器&lt;p&gt;</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> source 着色器的glsl代码</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 着色器id</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">loadShader</span><span class="params">(<span class="keyword">int</span> shaderType, String source)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> shader = GLES20.glCreateShader(shaderType); <span class="comment">//根据着色器type创建一个着色器，返回其id</span></span><br><span class="line">        <span class="keyword">if</span>(shader != <span class="number">0</span>) &#123;</span><br><span class="line">            GLES20.glShaderSource(shader, source); <span class="comment">//将着色器与源代码绑定</span></span><br><span class="line">            GLES20.glCompileShader(shader);     <span class="comment">//编译</span></span><br><span class="line">            <span class="keyword">int</span>[] compiled = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">1</span>];</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 获取Shader的编译情况</span></span><br><span class="line">            GLES20.glGetShaderiv(shader, GLES20.GL_COMPILE_STATUS, compiled, <span class="number">0</span>);</span><br><span class="line">            <span class="keyword">if</span>(compiled[<span class="number">0</span>] == <span class="number">0</span>) &#123;</span><br><span class="line">                Log.e(TAG, <span class="string">"compile error:"</span> + shaderType);</span><br><span class="line">                Log.e(TAG, <span class="string">"compile error:"</span> + GLES20.glGetShaderInfoLog(shader));</span><br><span class="line">                GLES20.glDeleteShader(shader);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> shader;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="3-顶点着色器和片元着色器"><a href="#3-顶点着色器和片元着色器" class="headerlink" title="3.顶点着色器和片元着色器"></a>3.顶点着色器和片元着色器</h3><figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// vertex.glsl  顶点着色器</span></span><br><span class="line"><span class="keyword">uniform</span> <span class="type">mat4</span> uMVPMatrix;        <span class="comment">//变换矩阵</span></span><br><span class="line"><span class="keyword">attribute</span> <span class="type">vec3</span> aPosition;              <span class="comment">//初始顶点坐标</span></span><br><span class="line"><span class="keyword">attribute</span> <span class="type">vec4</span> aColor;                  <span class="comment">//顶点颜色</span></span><br><span class="line"><span class="keyword">varying</span> <span class="type">vec4</span> vColor;                    <span class="comment">//传递给片元着色器的顶点颜色</span></span><br><span class="line"><span class="type">void</span> main() &#123;</span><br><span class="line">    <span class="built_in">gl_Position</span> = uMVPMatrix * <span class="type">vec4</span>(aPosition, <span class="number">1</span>);      <span class="comment">//将初始顶点和变换矩阵做矩阵乘法，得到变换后的顶点坐标，赋给内建变量</span></span><br><span class="line">    vColor = aColor;                                    <span class="comment">//vColor传递给片元着色器</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// fragment.glsl    片元着色器</span></span><br><span class="line"><span class="keyword">precision</span> <span class="keyword">mediump</span> <span class="type">float</span>;    <span class="comment">//指定片元着色器float精度为中</span></span><br><span class="line"><span class="keyword">varying</span> <span class="type">vec4</span> vColor;        <span class="comment">//由顶点传入的经过插值化的颜色值</span></span><br><span class="line"><span class="type">void</span> main() &#123;</span><br><span class="line">    <span class="built_in">gl_FragColor</span> = vColor;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="4-Model类开发"><a href="#4-Model类开发" class="headerlink" title="4.Model类开发"></a>4.Model类开发</h3><p>在外部程序中获取glsl程序中该变量对应id-&gt;初始化缓冲区-&gt;draw的时候将缓冲区数据送入渲染管线。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//三角形的Model</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Triangle</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String TAG = <span class="string">"Triangle"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 具体物体的3D变换矩阵</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">float</span>[] mMMartrix = <span class="keyword">new</span> <span class="keyword">float</span>[<span class="number">16</span>];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> mProgram;   <span class="comment">//程序id</span></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 顶点着色器中 uniform mat4 uMVPMatrix 变量id</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">int</span> muMVPMatrixHandle;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 顶点着色器中 attribute vec3 aPosition 变量id</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">int</span> maPositionHandle;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 顶点着色器中 attribute vec4 aColor 变量id</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">int</span> maColorHandle;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 顶点着色器代码</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    String mVertexShader;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 片元着色器代码</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    String mFragmentShader;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 初始顶点数据的缓冲区</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    FloatBuffer mVertexBuffer;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 初始颜色数据的缓冲区</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    FloatBuffer mColorBuffer;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 顶点个数</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">int</span> vCount = <span class="number">0</span>;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 当前绕X轴旋转的角度</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">float</span> xAngle;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Triangle</span><span class="params">(Resources resources)</span> </span>&#123;</span><br><span class="line">        initVertexData();</span><br><span class="line">        initShader(resources);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Array 长度分配和顶点个数有关系：顶点个数 * 每个顶点需要多少个分量,vec3就是3个分量</span></span><br><span class="line"><span class="comment">     * ByteBuffer长度分配和Array长度有关系：Array长度 * Array一个元素占多少个字节(一个float为4个字节)</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">initVertexData</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        vCount = <span class="number">3</span>;</span><br><span class="line">        <span class="keyword">final</span> <span class="keyword">float</span> UNIT_SIZE = <span class="number">0.2f</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//顶点位置数据： 3个顶点，每个顶点位置为(x,y,z)的vec3数据</span></span><br><span class="line">        <span class="keyword">float</span>[] vertexArray = <span class="keyword">new</span> <span class="keyword">float</span>[]&#123;</span><br><span class="line">                -<span class="number">4</span>*UNIT_SIZE, <span class="number">0</span>, <span class="number">0</span>, <span class="comment">//顶点1</span></span><br><span class="line">                <span class="number">0</span>, -<span class="number">4</span>*UNIT_SIZE, <span class="number">0</span>, <span class="comment">//顶点2</span></span><br><span class="line">                <span class="number">4</span>*UNIT_SIZE,<span class="number">0</span> , <span class="number">0</span>   <span class="comment">//顶点3</span></span><br><span class="line">        &#125;;</span><br><span class="line">        mVertexBuffer = ByteBuffer.allocateDirect(vertexArray.length * <span class="number">4</span>)</span><br><span class="line">                .order(ByteOrder.nativeOrder()) <span class="comment">//之所以不直接用FloatBuffer.allocate方法是因为只有ByteBuffer有nativeOrder()方法</span></span><br><span class="line">                .asFloatBuffer()</span><br><span class="line">                .put(vertexArray);</span><br><span class="line">        mVertexBuffer.position(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//顶点颜色数据： 3个顶点，每个顶点颜色为(r,g,b,a)的vec4数据</span></span><br><span class="line">        <span class="keyword">float</span>[] colorArray = <span class="keyword">new</span> <span class="keyword">float</span>[]&#123;</span><br><span class="line">                <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="comment">//顶点1</span></span><br><span class="line">                <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="comment">//顶点2</span></span><br><span class="line">                <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>  <span class="comment">//顶点3</span></span><br><span class="line">        &#125;;</span><br><span class="line">        mColorBuffer = ByteBuffer.allocateDirect(colorArray.length * <span class="number">4</span>)</span><br><span class="line">                .order(ByteOrder.nativeOrder())</span><br><span class="line">                .asFloatBuffer()</span><br><span class="line">                .put(colorArray);</span><br><span class="line">        mColorBuffer.position(<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">initShader</span><span class="params">(Resources resources)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 从glsl文件中加载着色器代码，当然也可以在Java代码中写死</span></span><br><span class="line">        mVertexShader = ShaderUtil.loadFromAssetsFile(<span class="string">"vertex.glsl"</span>, resources);</span><br><span class="line">        mFragmentShader = ShaderUtil.loadFromAssetsFile(<span class="string">"fragment.glsl"</span>, resources);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (TextUtils.isEmpty(mVertexShader) || TextUtils.isEmpty(mFragmentShader)) &#123;</span><br><span class="line">            Log.e(TAG, <span class="string">"load vertexShader or fragmentShader source code failed."</span>);</span><br><span class="line">            Log.e(TAG, <span class="string">"vertexShader: "</span> + mVertexShader);</span><br><span class="line">            Log.e(TAG, <span class="string">"fragmentShader: "</span> + mFragmentShader);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        mProgram = ShaderUtil.createProgram(mVertexShader, mFragmentShader);</span><br><span class="line">        <span class="keyword">if</span>(mProgram == <span class="number">0</span>) &#123;</span><br><span class="line">            Log.e(TAG, <span class="string">"createProgram failed."</span>);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//获取需要java层传给GL层的变量的id</span></span><br><span class="line">        maPositionHandle = GLES20.glGetAttribLocation(mProgram, <span class="string">"aPosition"</span>);</span><br><span class="line">        maColorHandle = GLES20.glGetAttribLocation(mProgram, <span class="string">"aColor"</span>);</span><br><span class="line">        muMVPMatrixHandle = GLES20.glGetUniformLocation(mProgram, <span class="string">"uMVPMatrix"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 使用OpenGL画出自己，一般在GLSurfaceView.Render的onDrawFrame中调用</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">drawSelf</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        GLES20.glUseProgram(mProgram);</span><br><span class="line">       <span class="comment">//在每次draw的时候初始化变换矩阵，然后进行矩阵变换，如果不调用会出现以下两种情况</span></span><br><span class="line">       <span class="comment">//①变换矩阵为全0矩阵，无法渲染</span></span><br><span class="line">       <span class="comment">//②变换矩阵还保留着上一次的值，渲染异常</span></span><br><span class="line">        Matrix.setRotateM(mMMartrix, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>);    </span><br><span class="line">         <span class="comment">// 对物体顶点进行各种变换，当然也可以不操作直接把原始顶点画上去。</span></span><br><span class="line">        Matrix.rotateM(mMMartrix, <span class="number">0</span>, xAngle, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//对于attribute变量，需要enable</span></span><br><span class="line">        GLES20.glEnableVertexAttribArray(maPositionHandle);</span><br><span class="line">        GLES20.glEnableVertexAttribArray(maColorHandle);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//将需要传给着色器的变量通过id送入渲染管线</span></span><br><span class="line">        GLES20.glUniformMatrix4fv(muMVPMatrixHandle, <span class="number">1</span>, <span class="keyword">false</span>, MatrixState.getFinalMatrix(mMMartrix), <span class="number">0</span>);   <span class="comment">//getFinalMatrix是将物体本来的变换矩阵与摄像机矩阵、投影矩阵相乘而得出的最终的变换矩阵，这个矩阵已经是投影到近平面上的矩阵了，关于摄像机和投影可以看下篇文章</span></span><br><span class="line">        GLES20.glVertexAttribPointer(</span><br><span class="line">        maPositionHandle,   <span class="comment">//顶点着色器变量id</span></span><br><span class="line">        <span class="number">3</span>,                  <span class="comment">//着色器中该变量有几个分量,aPosition是vec3，所以是3个</span></span><br><span class="line">        GLES20.GL_FLOAT,    <span class="comment">//着色器中该变量类型,vec是float型</span></span><br><span class="line">        <span class="keyword">false</span>,</span><br><span class="line">        <span class="number">3</span>*<span class="number">4</span>,                <span class="comment">//一次从Buffer中取多少数据作为该变量的值。这里一个vec3顶点有3个分量，每个分量为float型，所以每次取值跨越的字节数为 3*4bytes = 12bytes</span></span><br><span class="line">        mVertexBuffer);     <span class="comment">//缓冲区</span></span><br><span class="line">        GLES20.glVertexAttribPointer(maColorHandle, <span class="number">4</span>, GLES20.GL_FLOAT, <span class="keyword">false</span>, <span class="number">4</span>*<span class="number">4</span>, mColorBuffer);</span><br><span class="line"></span><br><span class="line">        GLES20.glDrawArrays(GLES20.GL_TRIANGLES, <span class="number">0</span>, vCount);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="5-GLSurfaceView"><a href="#5-GLSurfaceView" class="headerlink" title="5.GLSurfaceView"></a>5.GLSurfaceView</h3><p>要使用OpenGL渲染，需要GLSurfaceView的EGL环境，这里通过继承GLSurfaceView实现。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MySurfaceView</span> <span class="keyword">extends</span> <span class="title">GLSurfaceView</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">final</span> <span class="keyword">float</span> ANGLE_SPAN = <span class="number">0.375f</span>;</span><br><span class="line">    RotateThread rthread;</span><br><span class="line">    SceneRender mRender;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MySurfaceView</span><span class="params">(Context context)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>(context, <span class="keyword">null</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MySurfaceView</span><span class="params">(Context context, AttributeSet attrs)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(context, attrs);</span><br><span class="line">        init();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        setEGLContextClientVersion(<span class="number">2</span>);  <span class="comment">//设置OpenGL版本为2.x</span></span><br><span class="line">        mRender = <span class="keyword">new</span> SceneRender();</span><br><span class="line">        setRenderer(mRender);</span><br><span class="line">        <span class="comment">// 设置渲染模式，RENDERMODE_CONTINUOUSLY为底层不停调用onDrawFrame进行渲染</span></span><br><span class="line">        <span class="comment">//  RENDERMODE_WHEN_DIRTY为只有当onSurfaceCreated时和主动调用requestRender时才会发起渲染</span></span><br><span class="line">        setRenderMode(GLSurfaceView.RENDERMODE_CONTINUOUSLY);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">SceneRender</span> <span class="keyword">implements</span> <span class="title">GLSurfaceView</span>.<span class="title">Renderer</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        Triangle tle;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onSurfaceCreated</span><span class="params">(GL10 gl, EGLConfig config)</span> </span>&#123;</span><br><span class="line">            GLES20.glClearColor(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1.0f</span>); <span class="comment">// 屏幕背景色</span></span><br><span class="line">            GLES20.glEnable(GLES20.GL_DEPTH_TEST);  <span class="comment">// 开启深度检测</span></span><br><span class="line">            tle = <span class="keyword">new</span> Triangle(getResources());</span><br><span class="line">            rthread = <span class="keyword">new</span> RotateThread();</span><br><span class="line">            rthread.start();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onSurfaceChanged</span><span class="params">(GL10 gl, <span class="keyword">int</span> width, <span class="keyword">int</span> height)</span> </span>&#123;</span><br><span class="line">            GLES20.glViewport(<span class="number">0</span>, <span class="number">0</span>, width, height); <span class="comment">//设置视口</span></span><br><span class="line">            <span class="keyword">float</span> ratio = (<span class="keyword">float</span>)width / height;</span><br><span class="line">            MatrixState.setProjectFrustum(-ratio, ratio, -<span class="number">1</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">10</span>); <span class="comment">// 设置投影矩阵：透视投影</span></span><br><span class="line">            MatrixState.setCamera(  <span class="comment">//设置摄像机矩阵</span></span><br><span class="line">                    <span class="number">0</span>, <span class="number">0</span>, <span class="number">3</span>,</span><br><span class="line">                    <span class="number">0f</span>, <span class="number">0f</span>, <span class="number">0f</span>,</span><br><span class="line">                    <span class="number">0f</span>, -<span class="number">1f</span>, <span class="number">0f</span>);</span><br><span class="line">            <span class="comment">//关于投影矩阵和摄像机矩阵，可以看文章：摄像机和投影</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onDrawFrame</span><span class="params">(GL10 gl)</span> </span>&#123;</span><br><span class="line">            <span class="comment">// 每一次都需要清除存在于帧缓冲中的上一次的深度缓存和颜色缓存，不然会将上一帧的内容也画上去</span></span><br><span class="line">            GLES20.glClear(GLES20.GL_DEPTH_BUFFER_BIT | GLES20.GL_COLOR_BUFFER_BIT);    </span><br><span class="line">            tle.drawSelf();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">RotateThread</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">boolean</span> flag = <span class="keyword">true</span>;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">while</span> (flag) &#123;</span><br><span class="line">                <span class="comment">//通过不停改变xAngle达到一种绕x轴旋转的效果</span></span><br><span class="line">                mRender.tle.xAngle += ANGLE_SPAN;</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    Thread.sleep(<span class="number">20</span>);</span><br><span class="line">                &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/09/02/OpenGL-2-着色语言/" rel="next" title="OpenGL(2) - 着色语言">
+                <i class="fa fa-chevron-left"></i> OpenGL(2) - 着色语言
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/10/24/OpenGL-4-投影和摄像机/" rel="prev" title="OpenGL(4) - 投影和摄像机">
+                OpenGL(4) - 投影和摄像机 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Slim</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#OpenGL-3-OpenGL’s-Hello-World"><span class="nav-number">1.</span> <span class="nav-text">OpenGL(3) - OpenGL’s Hello World</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-编写GLSL程序"><span class="nav-number">1.0.1.</span> <span class="nav-text">1.编写GLSL程序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-创建着色器程序的工具类"><span class="nav-number">1.0.2.</span> <span class="nav-text">2.创建着色器程序的工具类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-顶点着色器和片元着色器"><span class="nav-number">1.0.3.</span> <span class="nav-text">3.顶点着色器和片元着色器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-Model类开发"><span class="nav-number">1.0.4.</span> <span class="nav-text">4.Model类开发</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-GLSurfaceView"><span class="nav-number">1.0.5.</span> <span class="nav-text">5.GLSurfaceView</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Slim</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
