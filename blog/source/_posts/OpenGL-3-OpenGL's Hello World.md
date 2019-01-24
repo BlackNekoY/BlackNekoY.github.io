@@ -1,22 +1,13 @@
 ---
 title: OpenGL(3) - OpenGL's Hello World
-tags: []
-keywords:
-  - a
-  - b
-  - c
+tags: 
+  - OpenGL
 comments: true
 date: 2017-09-15 17:50:36
-updated:
 categories:
-description:
-image:
+  - 技术
+description: OpenGL学习笔记 3
 ---
-<p class="description"></p>
-
-<img src="" class="img-topic"/>
-
-<br />
 
 # OpenGL(3) - OpenGL's Hello World
 ### 1.编写GLSL程序

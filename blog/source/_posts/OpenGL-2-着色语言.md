@@ -1,22 +1,13 @@
 ---
 title: OpenGL(2) - 着色语言
-tags: []
-keywords:
-  - a
-  - b
-  - c
+tags: 
+  - OpenGL
 comments: true
 date: 2017-09-02 17:36:29
-updated:
 categories:
-description:
-image:
+  - 技术
+description: OpenGL学习笔记 2
 ---
-<p class="description"></p>
-
-<img src="" class="img-topic"/>
-
-<br />
 
 # OpenGL(2) - 着色语言
 

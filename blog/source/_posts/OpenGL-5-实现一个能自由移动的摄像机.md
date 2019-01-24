@@ -1,23 +1,13 @@
 ---
 title: OpenGL(5) - 实现一个能自由移动的摄像机
-tags: []
-keywords:
-  - a
-  - b
-  - c
+tags: 
+  - OpenGL
 comments: true
 date: 2017-10-31 17:53:37
-updated:
 categories:
-description:
-image:
+  - 技术
+description: OpenGL学习笔记 5
 ---
-<p class="description"></p>
-
-<img src="" class="img-topic"/>
-
-<br />
-
 
 # 实现一个能自由移动的摄像机
 ## 摄像机矩阵（观察矩阵）

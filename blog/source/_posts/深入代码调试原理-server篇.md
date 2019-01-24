@@ -1,24 +1,16 @@
 ---
 title: '深入代码调试原理 - server篇'
-tags: []
-keywords:
+tags: 
   - debug
+  - c++
 comments: true
 date: 2019-01-11 14:33:42
-updated:
 categories:
-description:
+  - 技术
+description: 基于JSC::Debugger实现的Native调试器。
 image:
 ---
-<p class="description"></p>
 
-<img src="" class="img-topic"/>
-
-
-<br />
-
-# 深入代码调试原理-server篇
-*slim*
 ## 1.理解JSCore的Debugger整体架构
 ### 1.1 JSC的Debugger层
 先来看一下JSCore对外提供的Debugger框架：

@@ -1,22 +1,13 @@
 ---
 title: OpenGL(4) - 投影和摄像机
-tags: []
-keywords:
-  - a
-  - b
-  - c
+tags: 
+  - OpenGL
 comments: true
 date: 2017-10-24 17:53:37
-updated:
 categories:
-description:
-image:
+  - 技术
+description: OpenGL学习笔记 4
 ---
-<p class="description"></p>
-
-<img src="" class="img-topic"/>
-
-<br />
 
 # OpenGL入门(4) - 投影和摄像机
 ## 1.OpenGL中的摄像机、视景体、近平面

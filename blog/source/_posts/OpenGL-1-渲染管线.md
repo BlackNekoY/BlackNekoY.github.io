@@ -1,22 +1,13 @@
 ---
 title: 'OpenGL(1) - 渲染管线'
-tags: []
-keywords:
-  - a
-  - b
-  - c
+tags: 
+  - OpenGL
 comments: true
 date: 2017-08-31 21:12:30
-updated:
 categories:
-description:
-image:
+  - 技术
+description: OpenGL学习笔记 1
 ---
-<p class="description"></p>
-
-<img src="" class="img-topic"/>
-
-<br />
 
 # OpenGL(1) - 渲染管线
 ### OpenGL ES2.x渲染管线

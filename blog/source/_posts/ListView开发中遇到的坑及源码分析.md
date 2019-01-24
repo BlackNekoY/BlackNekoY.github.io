@@ -1,22 +1,14 @@
 ---
 title: ListView开发中遇到的坑及源码分析
-tags: []
-keywords:
-  - a
-  - b
-  - c
+author: Slim
+tags: 
+  - Android
 comments: true
 date: 2017-10-31 23:49:25
-updated:
 categories:
-description:
-image:
+  - 技术
+description: 日常工作ListView开发总结
 ---
-<p class="description"></p>
-
-<img src="" class="img-topic"/>
-
-<br />
 
 ## ListView开发中遇到的坑及源码分析
 ### 1、起因

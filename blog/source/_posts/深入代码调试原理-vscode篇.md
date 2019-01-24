@@ -1,24 +1,16 @@
 ---
 title: 深入代码调试原理 - vscode篇
-tags: []
-keywords:
+author: Slim
+tags: 
   - debug
+  - vscode
 comments: true
 date: 2018-12-29 14:57:26
-updated:
 categories:
-description:
-image:
+  - 技术
+description: 基于vscode插件的debugger实现原理。
 ---
-<p class="description"></p>
 
-<img src="" class="img-topic"/>
-
-
-<br />
-
-# 深入代码调试原理-QG VSCode篇
-*slim*
 
 > <font size=5>**前言**</font>
 > Debugger按端大致分为vscode插件端和Server端，插件端主要负责，打开被调试工程，Socket连接Server通信，显示来自Server端的调试数据。Server端主要负责，监听端口等待vscode端连接，并在断点断住的时候传输调试数据给vscode端。
