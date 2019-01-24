@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next muse use-motion" lang="">
+<html class="theme-next mist use-motion" lang="zh-Hans">
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="a,b,c">
+  <meta name="keywords" content="Android,">
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="ListView开发中遇到的坑及源码分析1、起因之前在需求开发的时候碰到过一个坑，出于某种原因，在Adapter的getView()方法中不能使用xml的资源，只能new出一个View，例如：12345678@Overridepublic View getView(int position, View convertView, ViewGroup parent) &amp;#123;     Te">
-<meta name="keywords" content="a,b,c">
+<meta name="description" content="日常工作ListView开发总结">
+<meta name="keywords" content="Android">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ListView开发中遇到的坑及源码分析">
 <meta property="og:url" content="http://yoursite.com/2017/10/31/ListView开发中遇到的坑及源码分析/index.html">
 <meta property="og:site_name" content="Slim&#39;s Blog">
-<meta property="og:description" content="ListView开发中遇到的坑及源码分析1、起因之前在需求开发的时候碰到过一个坑，出于某种原因，在Adapter的getView()方法中不能使用xml的资源，只能new出一个View，例如：12345678@Overridepublic View getView(int position, View convertView, ViewGroup parent) &amp;#123;     Te">
-<meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-01-24T11:07:23.089Z">
+<meta property="og:description" content="日常工作ListView开发总结">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-01-24T13:20:59.597Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ListView开发中遇到的坑及源码分析">
-<meta name="twitter:description" content="ListView开发中遇到的坑及源码分析1、起因之前在需求开发的时候碰到过一个坑，出于某种原因，在Adapter的getView()方法中不能使用xml的资源，只能new出一个View，例如：12345678@Overridepublic View getView(int position, View convertView, ViewGroup parent) &amp;#123;     Te">
+<meta name="twitter:description" content="日常工作ListView开发总结">
 
 
 
@@ -98,7 +98,7 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Muse',
+    scheme: 'Mist',
     version: '5.1.4',
     sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
@@ -106,7 +106,7 @@
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     duoshuo: {
       userId: '0',
-      author: 'Author'
+      author: '博主'
     },
     algolia: {
       applicationID: '',
@@ -138,7 +138,7 @@
 
 </head>
 
-<body itemscope="" itemtype="http://schema.org/WebPage" lang="default">
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
   
@@ -186,7 +186,37 @@
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
             
-            Home
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
           </a>
         </li>
       
@@ -196,7 +226,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
             
-            Archives
+            归档
           </a>
         </li>
       
@@ -260,9 +290,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-10-31T23:49:25+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-31T23:49:25+08:00">
                 2017-10-31
               </time>
             
@@ -273,6 +303,28 @@
           </span>
 
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -285,6 +337,10 @@
 
           
 
+          
+              <div class="post-description">
+                  日常工作ListView开发总结
+              </div>
           
 
         </div>
@@ -300,11 +356,7 @@
       
 
       
-        <p class="description"></p>
-
-<p><img src="" class="img-topic"></p>
-<p><br></p>
-<h2 id="ListView开发中遇到的坑及源码分析"><a href="#ListView开发中遇到的坑及源码分析" class="headerlink" title="ListView开发中遇到的坑及源码分析"></a>ListView开发中遇到的坑及源码分析</h2><h3 id="1、起因"><a href="#1、起因" class="headerlink" title="1、起因"></a>1、起因</h3><p>之前在需求开发的时候碰到过一个坑，出于某种原因，在Adapter的getView()方法中不能使用xml的资源，只能new出一个View，例如：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> View <span class="title">getView</span><span class="params">(<span class="keyword">int</span> position, View convertView, ViewGroup parent)</span> </span>&#123;</span><br><span class="line">     TextView textView = <span class="keyword">new</span> TextView(mContext);</span><br><span class="line">     LinearLayout.LayoutParams params = <span class="keyword">new</span> LinearLayout.LayoutParams(</span><br><span class="line">             ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);</span><br><span class="line">     textView.setLayoutParams(params);</span><br><span class="line">     <span class="keyword">return</span> textView;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure></p>
+        <h2 id="ListView开发中遇到的坑及源码分析"><a href="#ListView开发中遇到的坑及源码分析" class="headerlink" title="ListView开发中遇到的坑及源码分析"></a>ListView开发中遇到的坑及源码分析</h2><h3 id="1、起因"><a href="#1、起因" class="headerlink" title="1、起因"></a>1、起因</h3><p>之前在需求开发的时候碰到过一个坑，出于某种原因，在Adapter的getView()方法中不能使用xml的资源，只能new出一个View，例如：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> View <span class="title">getView</span><span class="params">(<span class="keyword">int</span> position, View convertView, ViewGroup parent)</span> </span>&#123;</span><br><span class="line">     TextView textView = <span class="keyword">new</span> TextView(mContext);</span><br><span class="line">     LinearLayout.LayoutParams params = <span class="keyword">new</span> LinearLayout.LayoutParams(</span><br><span class="line">             ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);</span><br><span class="line">     textView.setLayoutParams(params);</span><br><span class="line">     <span class="keyword">return</span> textView;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure></p>
 <p>这时需要的是给这个View设置LayoutParams，在之前的概念中对这个LayoutParams的类型没有直接的要求，一般是看需求使用LinearLayout.LayoutParams或者RelativeLayout.LayoutParams，然后设置给View后就返回了。然后一段时间的平安无事后，测试突然丢了段crash日志给我，图我找不到了，但是第一行就是：LinearLayout.LayoutParams cannot cast to AbsListView.LayoutParams：</p>
 <p>可以看出这是类型转换异常，但是我拿到这个日志后就很奇怪，因为在我的测试机上不会有问题，而在测试的机子上这是必现crash，我想应该是API版本问题，我的测试机是API 21以上的，而测试的机型是Kitkat（API 19），于是我直接分析API 19 的源码。</p>
 <h3 id="2、跟踪源码（API-19）"><a href="#2、跟踪源码（API-19）" class="headerlink" title="2、跟踪源码（API 19）"></a>2、跟踪源码（API 19）</h3><p>我们知道，View的绘制机制是onMeasure()-&gt;onLayout()-&gt;onDraw()，这种类型转换异常肯定是在Measure的步骤就发生了的，毕竟Measure的时候肯定得使用LayoutParams的，于是跟踪进ListView的onMeasure方法中看它做了什么：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onMeasure</span><span class="params">(<span class="keyword">int</span> widthMeasureSpec, <span class="keyword">int</span> heightMeasureSpec)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">super</span>.onMeasure(widthMeasureSpec, heightMeasureSpec);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> widthMode = MeasureSpec.getMode(widthMeasureSpec);</span><br><span class="line">    <span class="keyword">int</span> heightMode = MeasureSpec.getMode(heightMeasureSpec);</span><br><span class="line">    <span class="keyword">int</span> widthSize = MeasureSpec.getSize(widthMeasureSpec);</span><br><span class="line">    <span class="keyword">int</span> heightSize = MeasureSpec.getSize(heightMeasureSpec);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> childWidth = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> childHeight = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> childState = <span class="number">0</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">// 根据我们继承的Adapter的getCount()方法得到一共有多少个Child</span></span><br><span class="line">    mItemCount = mAdapter == <span class="keyword">null</span> ? <span class="number">0</span> : mAdapter.getCount();</span><br><span class="line">    <span class="keyword">if</span> (mItemCount &gt; <span class="number">0</span> &amp;&amp; (widthMode == MeasureSpec.UNSPECIFIED ||</span><br><span class="line">            heightMode == MeasureSpec.UNSPECIFIED)) &#123;</span><br><span class="line">        <span class="comment">// 这里通过obtainView()拿到childView</span></span><br><span class="line">        <span class="keyword">final</span> View child = obtainView(<span class="number">0</span>, mIsScrap);</span><br><span class="line">		<span class="comment">// 去测量该childView --- crash的地点！</span></span><br><span class="line">        measureScrapChild(child, <span class="number">0</span>, widthMeasureSpec);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 省略代码...</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">   <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 省略根据widthMode 和 heightMode 计算 widthSize 和 heightSize 的代码</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line"></span><br><span class="line">    setMeasuredDimension(widthSize , heightSize);</span><br><span class="line">    mWidthMeasureSpec = widthMeasureSpec;        </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
@@ -343,6 +395,12 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android/" rel="tag"># Android</a>
+          
+        </div>
       
 
       
@@ -419,10 +477,10 @@
       
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table of Contents
+            文章目录
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Overview
+            站点概览
           </li>
         </ul>
       
@@ -443,13 +501,31 @@
                 <a href="/archives/">
               
                   <span class="site-state-item-count">10</span>
-                  <span class="site-state-item-name">posts</span>
+                  <span class="site-state-item-name">日志</span>
                 </a>
               </div>
             
 
             
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
 
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
             
 
           </nav>
@@ -509,7 +585,7 @@
 </div>
 
 
-  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
 
 
 
@@ -517,7 +593,7 @@
 
 
 
-  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
 
 
 
