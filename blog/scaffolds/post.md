@@ -1,16 +1,10 @@
 ---
 title: {{ title }}
 date: {{ date }}
-updated:
-tags: []
+tags:
+  - Android
 categories:
-keywords: [a, b, c]
+  - 技术
 comments: true
 description:
-image:
 ---
-<p class="description"></p>
-
-<img src="" class="img-topic"/>
-
-<br />
