@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="a,b,c">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="ListView开发中遇到的坑及源码分析1、起因之前在需求开发的时候碰到过一个坑，出于某种原因，在Adapter的getView()方法中不能使用xml的资源，只能new出一个View，例如：12345678@Overridepublic View getView(int position, View convertView, ViewGroup parent) &amp;#123;     Te">
+<meta name="keywords" content="a,b,c">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ListView开发中遇到的坑及源码分析">
+<meta property="og:url" content="http://yoursite.com/2017/10/31/ListView开发中遇到的坑及源码分析/index.html">
+<meta property="og:site_name" content="Slim&#39;s Blog">
+<meta property="og:description" content="ListView开发中遇到的坑及源码分析1、起因之前在需求开发的时候碰到过一个坑，出于某种原因，在Adapter的getView()方法中不能使用xml的资源，只能new出一个View，例如：12345678@Overridepublic View getView(int position, View convertView, ViewGroup parent) &amp;#123;     Te">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-01-24T11:07:23.089Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ListView开发中遇到的坑及源码分析">
+<meta name="twitter:description" content="ListView开发中遇到的坑及源码分析1、起因之前在需求开发的时候碰到过一个坑，出于某种原因，在Adapter的getView()方法中不能使用xml的资源，只能new出一个View，例如：12345678@Overridepublic View getView(int position, View convertView, ViewGroup parent) &amp;#123;     Te">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/10/31/ListView开发中遇到的坑及源码分析/">
+
+
+
+
+
+  <title>ListView开发中遇到的坑及源码分析 | Slim's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Slim's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/31/ListView开发中遇到的坑及源码分析/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Slim">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Slim's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">ListView开发中遇到的坑及源码分析</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-10-31T23:49:25+08:00">
+                2017-10-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p class="description"></p>
+
+<p><img src="" class="img-topic"></p>
+<p><br></p>
+<h2 id="ListView开发中遇到的坑及源码分析"><a href="#ListView开发中遇到的坑及源码分析" class="headerlink" title="ListView开发中遇到的坑及源码分析"></a>ListView开发中遇到的坑及源码分析</h2><h3 id="1、起因"><a href="#1、起因" class="headerlink" title="1、起因"></a>1、起因</h3><p>之前在需求开发的时候碰到过一个坑，出于某种原因，在Adapter的getView()方法中不能使用xml的资源，只能new出一个View，例如：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> View <span class="title">getView</span><span class="params">(<span class="keyword">int</span> position, View convertView, ViewGroup parent)</span> </span>&#123;</span><br><span class="line">     TextView textView = <span class="keyword">new</span> TextView(mContext);</span><br><span class="line">     LinearLayout.LayoutParams params = <span class="keyword">new</span> LinearLayout.LayoutParams(</span><br><span class="line">             ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);</span><br><span class="line">     textView.setLayoutParams(params);</span><br><span class="line">     <span class="keyword">return</span> textView;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure></p>
+<p>这时需要的是给这个View设置LayoutParams，在之前的概念中对这个LayoutParams的类型没有直接的要求，一般是看需求使用LinearLayout.LayoutParams或者RelativeLayout.LayoutParams，然后设置给View后就返回了。然后一段时间的平安无事后，测试突然丢了段crash日志给我，图我找不到了，但是第一行就是：LinearLayout.LayoutParams cannot cast to AbsListView.LayoutParams：</p>
+<p>可以看出这是类型转换异常，但是我拿到这个日志后就很奇怪，因为在我的测试机上不会有问题，而在测试的机子上这是必现crash，我想应该是API版本问题，我的测试机是API 21以上的，而测试的机型是Kitkat（API 19），于是我直接分析API 19 的源码。</p>
+<h3 id="2、跟踪源码（API-19）"><a href="#2、跟踪源码（API-19）" class="headerlink" title="2、跟踪源码（API 19）"></a>2、跟踪源码（API 19）</h3><p>我们知道，View的绘制机制是onMeasure()-&gt;onLayout()-&gt;onDraw()，这种类型转换异常肯定是在Measure的步骤就发生了的，毕竟Measure的时候肯定得使用LayoutParams的，于是跟踪进ListView的onMeasure方法中看它做了什么：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onMeasure</span><span class="params">(<span class="keyword">int</span> widthMeasureSpec, <span class="keyword">int</span> heightMeasureSpec)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">super</span>.onMeasure(widthMeasureSpec, heightMeasureSpec);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> widthMode = MeasureSpec.getMode(widthMeasureSpec);</span><br><span class="line">    <span class="keyword">int</span> heightMode = MeasureSpec.getMode(heightMeasureSpec);</span><br><span class="line">    <span class="keyword">int</span> widthSize = MeasureSpec.getSize(widthMeasureSpec);</span><br><span class="line">    <span class="keyword">int</span> heightSize = MeasureSpec.getSize(heightMeasureSpec);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> childWidth = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> childHeight = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> childState = <span class="number">0</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">// 根据我们继承的Adapter的getCount()方法得到一共有多少个Child</span></span><br><span class="line">    mItemCount = mAdapter == <span class="keyword">null</span> ? <span class="number">0</span> : mAdapter.getCount();</span><br><span class="line">    <span class="keyword">if</span> (mItemCount &gt; <span class="number">0</span> &amp;&amp; (widthMode == MeasureSpec.UNSPECIFIED ||</span><br><span class="line">            heightMode == MeasureSpec.UNSPECIFIED)) &#123;</span><br><span class="line">        <span class="comment">// 这里通过obtainView()拿到childView</span></span><br><span class="line">        <span class="keyword">final</span> View child = obtainView(<span class="number">0</span>, mIsScrap);</span><br><span class="line">		<span class="comment">// 去测量该childView --- crash的地点！</span></span><br><span class="line">        measureScrapChild(child, <span class="number">0</span>, widthMeasureSpec);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 省略代码...</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">   <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 省略根据widthMode 和 heightMode 计算 widthSize 和 heightSize 的代码</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line"></span><br><span class="line">    setMeasuredDimension(widthSize , heightSize);</span><br><span class="line">    mWidthMeasureSpec = widthMeasureSpec;        </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>onMeasure()方法根据obtainView()拿到每一个childView后，会紧接着调用measureScrapChild(child)去测量，我们继续跟进这个方法：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">measureScrapChild</span><span class="params">(View child, <span class="keyword">int</span> position, <span class="keyword">int</span> widthMeasureSpec)</span> </span>&#123;</span><br><span class="line">	<span class="comment">// 取出ChildView的LayoutParams进行强转，试图转成AbsListView.LayoutParams，就是这里发生了crash</span></span><br><span class="line">    LayoutParams p = (LayoutParams) child.getLayoutParams();</span><br><span class="line">    <span class="keyword">if</span> (p == <span class="keyword">null</span>) &#123;</span><br><span class="line">        p = (AbsListView.LayoutParams) generateDefaultLayoutParams();</span><br><span class="line">        child.setLayoutParams(p);</span><br><span class="line">    &#125;</span><br><span class="line">    p.viewType = mAdapter.getItemViewType(position);</span><br><span class="line">    p.forceAdd = <span class="keyword">true</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 省略部分代码...</span></span><br><span class="line">    </span><br><span class="line">    child.measure(childWidthSpec, childHeightSpec);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这样就找到了原因，ListView认为它所有的子View的LayoutParams都必须是AbsListView.LayoutParams类型的，如果是通过inflate xml文件得到的View，会自动设置上AbsListView.LayoutParams，但是通过代码new出来的View，如果不亲自设置，就会在源码中出现类型转换的crash。</p>
+<h3 id="3、解决问题（多种方案）"><a href="#3、解决问题（多种方案）" class="headerlink" title="3、解决问题（多种方案）"></a>3、解决问题（多种方案）</h3><p><strong>第一种方案：</strong><br>最推荐的也是最简单的处理方法当然是在Adapter的getView中不随便使用LayoutParams而必须使用AbsListView.LayoutParams，这样保证不会出现crash，如果需要new多个View就给他们的Parent设置该LayoutParams并返回parent：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> View <span class="title">getView</span><span class="params">(<span class="keyword">int</span> position, View convertView, ViewGroup parent)</span> </span>&#123;</span><br><span class="line">     TextView textView = <span class="keyword">new</span> TextView(mContext);</span><br><span class="line">     AbsListView.LayoutParams params = <span class="keyword">new</span> AbsListView.LayoutParams(</span><br><span class="line">             ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);</span><br><span class="line">     textView.setLayoutParams(params);</span><br><span class="line">     <span class="keyword">return</span> textView;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>第二种方案：</strong><br>在老版本中，如果很任性，就是不按照第一种方案来，而是想搞个大新闻的话，有没有其他的方案呢？答案当然是有的，我们继续分析源码，上面提到过，ListView根据obtainView()去获取childView，那么跟进obtainView()中去看下它做了什么：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"> <span class="function">View <span class="title">obtainView</span><span class="params">(<span class="keyword">int</span> position, <span class="keyword">boolean</span>[] isScrap)</span> </span>&#123;</span><br><span class="line">     Trace.traceBegin(Trace.TRACE_TAG_VIEW, <span class="string">"obtainView"</span>);</span><br><span class="line"></span><br><span class="line">     isScrap[<span class="number">0</span>] = <span class="keyword">false</span>;</span><br><span class="line">     View scrapView;</span><br><span class="line"></span><br><span class="line">     scrapView = mRecycler.getTransientStateView(position);</span><br><span class="line">     <span class="keyword">if</span> (scrapView == <span class="keyword">null</span>) &#123;</span><br><span class="line">         scrapView = mRecycler.getScrapView(position);</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     View child;</span><br><span class="line">	 <span class="comment">// 调用Adapter.getView()拿到childView</span></span><br><span class="line">     <span class="keyword">if</span> (scrapView != <span class="keyword">null</span>) &#123;</span><br><span class="line">         child = mAdapter.getView(position, scrapView, <span class="keyword">this</span>);</span><br><span class="line">         <span class="comment">// 省略...</span></span><br><span class="line">     &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">         child = mAdapter.getView(position, <span class="keyword">null</span>, <span class="keyword">this</span>);</span><br><span class="line">         <span class="comment">// 省略...</span></span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 如果mAdapterHasStableIds为true，则进入该分支</span></span><br><span class="line">     <span class="keyword">if</span> (mAdapterHasStableIds) &#123;</span><br><span class="line">	     <span class="comment">// 拿到child的LayoutParams</span></span><br><span class="line">         <span class="keyword">final</span> ViewGroup.LayoutParams vlp = child.getLayoutParams();</span><br><span class="line">         LayoutParams lp;</span><br><span class="line">         <span class="keyword">if</span> (vlp == <span class="keyword">null</span>) &#123;</span><br><span class="line">             lp = (LayoutParams) generateDefaultLayoutParams();</span><br><span class="line">         &#125; <span class="keyword">else</span> <span class="keyword">if</span> (!checkLayoutParams(vlp)) &#123;</span><br><span class="line">	         <span class="comment">// 如果拿到的LayoutParams不是AbsListView.LayoutParams，则给它包装成AbsListView.LayoutParams</span></span><br><span class="line">             lp = (LayoutParams) generateLayoutParams(vlp);</span><br><span class="line">         &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">             lp = (LayoutParams) vlp;</span><br><span class="line">         &#125;</span><br><span class="line">         lp.itemId = mAdapter.getItemId(position);</span><br><span class="line">         child.setLayoutParams(lp);</span><br><span class="line">     &#125;</span><br><span class="line">     <span class="comment">//省略...</span></span><br><span class="line">     <span class="keyword">return</span> child;</span><br><span class="line"> &#125;</span><br><span class="line"> </span><br><span class="line"><span class="comment">// 检查是否为AbsListView.LayoutParams</span></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">boolean</span> <span class="title">checkLayoutParams</span><span class="params">(ViewGroup.LayoutParams p)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> p <span class="keyword">instanceof</span> AbsListView.LayoutParams;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 包装为AbsListView.LayoutParams</span></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">protected</span> ViewGroup.<span class="function">LayoutParams <span class="title">generateLayoutParams</span><span class="params">(ViewGroup.LayoutParams p)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> LayoutParams(p);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>代码很简单，看注释就可以了。那么，很急很关键的是：mAdapterHasStableIds是个啥，它什么时候为true？很明显只要mAdapterHasStableIds==true，系统就会通过这个if分支对我们的LayoutParams进行保护处理，这样即使Adapter.getView中返回的View不是AbsListView.LayoutParams，也不会crash。<br>mAdapterHasStableIds是个啥，我们从ListView.setAdapter()开始看起：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ListView.java</span></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAdapter</span><span class="params">(ListAdapter adapter)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 省略...</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">// 调用了AbsListView.setAdapter    </span></span><br><span class="line">	<span class="keyword">super</span>.setAdapter(adapter);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 省略...</span></span><br><span class="line">    requestLayout();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// AbsListView.java</span></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAdapter</span><span class="params">(ListAdapter adapter)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (adapter != <span class="keyword">null</span>) &#123;</span><br><span class="line">	    <span class="comment">// 原来就是我们继承的Adapter的hasStableIds()的返回值！</span></span><br><span class="line">        mAdapterHasStableIds = mAdapter.hasStableIds();</span><br><span class="line">        <span class="keyword">if</span> (mChoiceMode != CHOICE_MODE_NONE &amp;&amp; mAdapterHasStableIds &amp;&amp;</span><br><span class="line">                mCheckedIdStates == <span class="keyword">null</span>) &#123;</span><br><span class="line">            mCheckedIdStates = <span class="keyword">new</span> LongSparseArray&lt;Integer&gt;();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">	<span class="comment">// 省略...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这样就很清楚了，我们写Adapter的时候，总会重写两个重要的方法：getCount()，getView()，但是Adapter还提供其他的方法的重写，比如getItemId()和hasStableIds()。所以想要解决这个crash，只要在Adapter的hasStableIds()返回true就搞定了。</p>
+<p><strong>但是，总得告诉我为什么吧？</strong></p>
+<h3 id="4、知其然，更知其所以然"><a href="#4、知其然，更知其所以然" class="headerlink" title="4、知其然，更知其所以然"></a>4、知其然，更知其所以然</h3><p>至于Adapter的hasStableIds()的方法到底起到什么样的作用，引用一段来自StackOverFlow的回答：</p>
+<blockquote>
+<p>Stable IDs allow the ListView to optimize for the case when items remain the same between notifyDataSetChanged calls. The IDs it refers to are the ones returned from getItemId.</p>
+</blockquote>
+<blockquote>
+<p>Without it, the ListView has to recreate all Views since it can’t know if the item IDs are the same between data changes (e.g. if the ID is just the index in the data, it has to recreate everything). With it, it can refrain from recreating Views that kept their item IDs.</p>
+</blockquote>
+<p>好了我知道你们没耐心翻译，简单来说就是：<strong>如果hasStableIds()返回了true，那么在调用notifyDataSetChanged刷新界面时，决定重绘每个ItemView之前，会调用Adapter.getItemId(int position)方法拿到该Item的新的id，和之前老的id对比，如果没有变化，则认为这个Item的数据没有变化，UI也不会发生变化，则不会Recreate这个ItemView，达到优化性能的目的。</strong></p>
+<p>所以hasStableIds()方法需要和getItemId()配合使用，那么到底在getItemId中返回什么样的数才能标识该Item的数据没有变化呢？在大部分情况下，返回这个Item对应的Model的hashCode就好了，用hashCode来标识数据有没有发生变化，在下面的例子中，如果一个Student的id和name不发生变化，则认为该Item数据没变化，不用重绘UI：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// StudentAdapter.java</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StudentAdapter</span> <span class="keyword">extends</span> <span class="title">BaseAdapter</span> </span>&#123;</span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">long</span> <span class="title">getItemId</span><span class="params">(<span class="keyword">int</span> position)</span> </span>&#123;</span><br><span class="line">	    Student student = mStudents.get(position);</span><br><span class="line">	    <span class="keyword">return</span> student.hashCode();</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">hasStableIds</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	    <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Student.java</span></span><br><span class="line"><span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Student</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> id;</span><br><span class="line">    String name;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">equals</span><span class="params">(Object o)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">this</span> == o) <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        <span class="keyword">if</span> (o == <span class="keyword">null</span> || getClass() != o.getClass()) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line"></span><br><span class="line">        Student student = (Student) o;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (id != student.id) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">return</span> name != <span class="keyword">null</span> ? name.equals(student.name) : student.name == <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">hashCode</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> result = id;</span><br><span class="line">        result = <span class="number">31</span> * result + (name != <span class="keyword">null</span> ? name.hashCode() : <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>所以我们重写Adapter时，不是只有getCount和getView方法重要，其他的方法也同样重要，以后如果允许的话，请不要简单的在getItemId()方法中返回position哦！</p>
+<h3 id="5、继续跟踪源码（API-21）"><a href="#5、继续跟踪源码（API-21）" class="headerlink" title="5、继续跟踪源码（API 21）"></a>5、继续跟踪源码（API 21）</h3><p>还遗留了最后一个问题，那么为啥在我的测试机(API 21)上不会出现crash呢，肯定是Android源码在新版本上进行了修改，同样去看AbsListView的obtainView()方法：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">View <span class="title">obtainView</span><span class="params">(<span class="keyword">int</span> position, <span class="keyword">boolean</span>[] outMetadata)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 省略...</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">final</span> View scrapView = mRecycler.getScrapView(position);</span><br><span class="line">    <span class="keyword">final</span> View child = mAdapter.getView(position, scrapView, <span class="keyword">this</span>);</span><br><span class="line">	</span><br><span class="line">	<span class="comment">// 省略... </span></span><br><span class="line">	</span><br><span class="line">	<span class="comment">// 这里会设置ChildView的LayoutParams</span></span><br><span class="line">    setItemViewLayoutParams(child, position);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 省略...</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> child;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>很容易看到的是，比起老版本，新版本代码多了一个setItemViewLayoutParams方法，只要调用obtainView就会进入这个方法里面，不会再有if条件。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 所有的ChildView都会通过这个方法设置LayoutParams，经过这层保护逻辑后，全部的LayoutParams都是AbsListView.LayoutParams类型拉</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">setItemViewLayoutParams</span><span class="params">(View child, <span class="keyword">int</span> position)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">final</span> ViewGroup.LayoutParams vlp = child.getLayoutParams();</span><br><span class="line">    LayoutParams lp;</span><br><span class="line">    <span class="keyword">if</span> (vlp == <span class="keyword">null</span>) &#123;</span><br><span class="line">        lp = (LayoutParams) generateDefaultLayoutParams();</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (!checkLayoutParams(vlp)) &#123;</span><br><span class="line">        lp = (LayoutParams) generateLayoutParams(vlp);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        lp = (LayoutParams) vlp;</span><br><span class="line">    &#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">// 其实还是会判断hasStableIds，只不过这里将ItemId直接赋值到LayoutParams里去了。</span></span><br><span class="line">    <span class="keyword">if</span> (mAdapterHasStableIds) &#123;</span><br><span class="line">        lp.itemId = mAdapter.getItemId(position);</span><br><span class="line">    &#125;</span><br><span class="line">    lp.viewType = mAdapter.getItemViewType(position);</span><br><span class="line">    lp.isEnabled = mAdapter.isEnabled(position);</span><br><span class="line">    <span class="keyword">if</span> (lp != vlp) &#123;</span><br><span class="line">      child.setLayoutParams(lp);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>这就是API &gt;= 21不会出现Crash的原因啦！</strong> </p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/10/31/OpenGL-5-实现一个能自由移动的摄像机/" rel="next" title="OpenGL(5) - 实现一个能自由移动的摄像机">
+                <i class="fa fa-chevron-left"></i> OpenGL(5) - 实现一个能自由移动的摄像机
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/12/29/深入代码调试原理-vscode篇/" rel="prev" title="深入代码调试原理 - vscode篇">
+                深入代码调试原理 - vscode篇 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Slim</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#ListView开发中遇到的坑及源码分析"><span class="nav-number">1.</span> <span class="nav-text">ListView开发中遇到的坑及源码分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、起因"><span class="nav-number">1.1.</span> <span class="nav-text">1、起因</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、跟踪源码（API-19）"><span class="nav-number">1.2.</span> <span class="nav-text">2、跟踪源码（API 19）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、解决问题（多种方案）"><span class="nav-number">1.3.</span> <span class="nav-text">3、解决问题（多种方案）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4、知其然，更知其所以然"><span class="nav-number">1.4.</span> <span class="nav-text">4、知其然，更知其所以然</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5、继续跟踪源码（API-21）"><span class="nav-number">1.5.</span> <span class="nav-text">5、继续跟踪源码（API 21）</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Slim</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
