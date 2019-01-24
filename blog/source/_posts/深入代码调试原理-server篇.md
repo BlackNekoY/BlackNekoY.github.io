@@ -1,5 +1,5 @@
 ---
-title: '[Debugger] - 深入代码调试原理 - server篇'
+title: '深入代码调试原理 - server篇'
 tags: []
 keywords:
   - a
