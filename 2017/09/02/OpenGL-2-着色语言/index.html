@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="a,b,c">
+  <meta name="keywords" content="OpenGL,">
 
 
 
@@ -79,19 +79,19 @@
 
 
 
-<meta name="description" content="OpenGL(2) - 着色语言1.数据类型标量：bool,int,float向量：vec2,vec3,vec4,ivec2,ivec3,ivec4,bvec2,bvec3,bvec4，数字代表该向量是几维向量，vec为float向量，ivec为int向量，bvec为bool向量。将一个向量看为颜色时，最多使用4个分量：[argb]将一个向量看为位置时，最多使用4个分量：[x,y,z,w]">
-<meta name="keywords" content="a,b,c">
+<meta name="description" content="OpenGL学习笔记 2">
+<meta name="keywords" content="OpenGL">
 <meta property="og:type" content="article">
 <meta property="og:title" content="OpenGL(2) - 着色语言">
 <meta property="og:url" content="http://yoursite.com/2017/09/02/OpenGL-2-着色语言/index.html">
 <meta property="og:site_name" content="Slim&#39;s Blog">
-<meta property="og:description" content="OpenGL(2) - 着色语言1.数据类型标量：bool,int,float向量：vec2,vec3,vec4,ivec2,ivec3,ivec4,bvec2,bvec3,bvec4，数字代表该向量是几维向量，vec为float向量，ivec为int向量，bvec为bool向量。将一个向量看为颜色时，最多使用4个分量：[argb]将一个向量看为位置时，最多使用4个分量：[x,y,z,w]">
+<meta property="og:description" content="OpenGL学习笔记 2">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2017/09/02/OpenGL-2-着色语言/test.png?r=40">
-<meta property="og:updated_time" content="2019-01-24T10:12:18.233Z">
+<meta property="og:updated_time" content="2019-01-24T13:24:58.776Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="OpenGL(2) - 着色语言">
-<meta name="twitter:description" content="OpenGL(2) - 着色语言1.数据类型标量：bool,int,float向量：vec2,vec3,vec4,ivec2,ivec3,ivec4,bvec2,bvec3,bvec4，数字代表该向量是几维向量，vec为float向量，ivec为int向量，bvec为bool向量。将一个向量看为颜色时，最多使用4个分量：[argb]将一个向量看为位置时，最多使用4个分量：[x,y,z,w]">
+<meta name="twitter:description" content="OpenGL学习笔记 2">
 <meta name="twitter:image" content="http://yoursite.com/2017/09/02/OpenGL-2-着色语言/test.png?r=40">
 
 
@@ -305,6 +305,28 @@
           </span>
 
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -317,6 +339,10 @@
 
           
 
+          
+              <div class="post-description">
+                  OpenGL学习笔记 2
+              </div>
           
 
         </div>
@@ -332,11 +358,7 @@
       
 
       
-        <p class="description"></p>
-
-<p><img src="" class="img-topic"></p>
-<p><br></p>
-<h1 id="OpenGL-2-着色语言"><a href="#OpenGL-2-着色语言" class="headerlink" title="OpenGL(2) - 着色语言"></a>OpenGL(2) - 着色语言</h1><h3 id="1-数据类型"><a href="#1-数据类型" class="headerlink" title="1.数据类型"></a>1.数据类型</h3><p><strong>标量：</strong>bool,int,float<br><strong>向量：</strong>vec2,vec3,vec4,ivec2,ivec3,ivec4,bvec2,bvec3,bvec4，数字代表该向量是几维向量，vec为float向量，ivec为int向量，bvec为bool向量。<br>将一个向量看为颜色时，最多使用4个分量：[argb]<br>将一个向量看为位置时，最多使用4个分量：[x,y,z,w]，w为齐次坐标，一般为1<br>将一个向量看为纹理时，最多使用4个分量：[s,t,p,q]<br>访问向量中分量的语法为:<strong>&lt;向量名&gt;·&lt;分量名&gt;</strong>，或者使用下标，如：<br><figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">vec3</span> position = <span class="type">vec3</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>);    <span class="comment">//构造一个vec3的标量</span></span><br><span class="line">position.x = <span class="number">10</span>;    <span class="comment">//将x分量置为10</span></span><br><span class="line">position[<span class="number">1</span>] = <span class="number">20</span>;   <span class="comment">//将y分量置为20</span></span><br></pre></td></tr></table></figure></p>
+        <h1 id="OpenGL-2-着色语言"><a href="#OpenGL-2-着色语言" class="headerlink" title="OpenGL(2) - 着色语言"></a>OpenGL(2) - 着色语言</h1><h3 id="1-数据类型"><a href="#1-数据类型" class="headerlink" title="1.数据类型"></a>1.数据类型</h3><p><strong>标量：</strong>bool,int,float<br><strong>向量：</strong>vec2,vec3,vec4,ivec2,ivec3,ivec4,bvec2,bvec3,bvec4，数字代表该向量是几维向量，vec为float向量，ivec为int向量，bvec为bool向量。<br>将一个向量看为颜色时，最多使用4个分量：[argb]<br>将一个向量看为位置时，最多使用4个分量：[x,y,z,w]，w为齐次坐标，一般为1<br>将一个向量看为纹理时，最多使用4个分量：[s,t,p,q]<br>访问向量中分量的语法为:<strong>&lt;向量名&gt;·&lt;分量名&gt;</strong>，或者使用下标，如：<br><figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">vec3</span> position = <span class="type">vec3</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>);    <span class="comment">//构造一个vec3的标量</span></span><br><span class="line">position.x = <span class="number">10</span>;    <span class="comment">//将x分量置为10</span></span><br><span class="line">position[<span class="number">1</span>] = <span class="number">20</span>;   <span class="comment">//将y分量置为20</span></span><br></pre></td></tr></table></figure></p>
 <p><strong>矩阵：</strong>mat2,mat3,mat4，都为float矩阵，数字代表几维矩阵<br>在OpenGL中，矩阵是按照列来组织的，所以可以将矩阵视为多个列向量的数组来访问，如：<br>一个矩阵赋值如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">  第1列 | 第2列 | 第3列</span><br><span class="line">1 | 2 | 3 </span><br><span class="line">4 | 5 | 6</span><br><span class="line">7 | 8 | 9</span><br></pre></td></tr></table></figure></p>
 <p>则在着色语言的访问方式：<br><figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">mat3</span> m3;</span><br><span class="line"><span class="type">vec3</span> v1 = m3[<span class="number">0</span>];    <span class="comment">// v1为(1,4,7)</span></span><br><span class="line"><span class="type">float</span> f = m3[<span class="number">1</span>][<span class="number">2</span>];     <span class="comment">// f为8</span></span><br></pre></td></tr></table></figure></p>
 <p><strong>采样器：</strong>sampler2D,sampler3D,samplerCube<br>sampler2D：二维纹理采样器<br>sampler3D：三维纹理采样器<br>samplerCube：立方体贴图采样器<br><strong>结构体:</strong><br><figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">struct info &#123;</span><br><span class="line">    <span class="type">vec3</span> color;</span><br><span class="line">    <span class="type">vec3</span> position;</span><br><span class="line">    <span class="type">vec2</span> textureColor;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
@@ -394,6 +416,12 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/OpenGL/" rel="tag"># OpenGL</a>
+          
+        </div>
       
 
       
@@ -493,7 +521,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -515,7 +543,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">标签</span>
                 
               </div>

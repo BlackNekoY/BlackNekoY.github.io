@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="a,b,c">
+  <meta name="keywords" content="OpenGL,">
 
 
 
@@ -79,23 +79,23 @@
 
 
 
-<meta name="description" content="实现一个能自由移动的摄像机摄像机矩阵（观察矩阵）对OpenGL有基本概念的同学应该都知道，为了将物体的自己的坐标转换为手机屏幕上的坐标，需要经过几个空间的变换。  局部空间（或者被称为物体控件）  在该空间下，所有的坐标都是相对于自身而言，坐标系原点可能位于物体中心。 世界空间  我们在世界空间里指定了一个原点，通过模型矩阵，将局部空间中的坐标转换到世界坐标，俗话说就是将我们的物体摆在世界">
-<meta name="keywords" content="a,b,c">
+<meta name="description" content="OpenGL学习笔记 5">
+<meta name="keywords" content="OpenGL">
 <meta property="og:type" content="article">
 <meta property="og:title" content="OpenGL(5) - 实现一个能自由移动的摄像机">
 <meta property="og:url" content="http://yoursite.com/2017/10/31/OpenGL-5-实现一个能自由移动的摄像机/index.html">
 <meta property="og:site_name" content="Slim&#39;s Blog">
-<meta property="og:description" content="实现一个能自由移动的摄像机摄像机矩阵（观察矩阵）对OpenGL有基本概念的同学应该都知道，为了将物体的自己的坐标转换为手机屏幕上的坐标，需要经过几个空间的变换。  局部空间（或者被称为物体控件）  在该空间下，所有的坐标都是相对于自身而言，坐标系原点可能位于物体中心。 世界空间  我们在世界空间里指定了一个原点，通过模型矩阵，将局部空间中的坐标转换到世界坐标，俗话说就是将我们的物体摆在世界">
+<meta property="og:description" content="OpenGL学习笔记 5">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2017/10/31/OpenGL-5-实现一个能自由移动的摄像机/2018-10-31-17-19-06.jpg">
 <meta property="og:image" content="http://yoursite.com/2017/10/31/OpenGL-5-实现一个能自由移动的摄像机/2018-10-31-17-24-14.jpg">
 <meta property="og:image" content="http://yoursite.com/2017/10/31/OpenGL-5-实现一个能自由移动的摄像机/2018-10-31-17-51-52.jpg">
 <meta property="og:image" content="http://yoursite.com/2017/10/31/OpenGL-5-实现一个能自由移动的摄像机/2018-10-31-20-02-12.jpg">
 <meta property="og:image" content="http://yoursite.com/2017/10/31/OpenGL-5-实现一个能自由移动的摄像机/ScreenRecord_2018-10-31-19-31-57.gif">
-<meta property="og:updated_time" content="2019-01-24T10:14:10.473Z">
+<meta property="og:updated_time" content="2019-01-24T13:26:38.036Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="OpenGL(5) - 实现一个能自由移动的摄像机">
-<meta name="twitter:description" content="实现一个能自由移动的摄像机摄像机矩阵（观察矩阵）对OpenGL有基本概念的同学应该都知道，为了将物体的自己的坐标转换为手机屏幕上的坐标，需要经过几个空间的变换。  局部空间（或者被称为物体控件）  在该空间下，所有的坐标都是相对于自身而言，坐标系原点可能位于物体中心。 世界空间  我们在世界空间里指定了一个原点，通过模型矩阵，将局部空间中的坐标转换到世界坐标，俗话说就是将我们的物体摆在世界">
+<meta name="twitter:description" content="OpenGL学习笔记 5">
 <meta name="twitter:image" content="http://yoursite.com/2017/10/31/OpenGL-5-实现一个能自由移动的摄像机/2018-10-31-17-19-06.jpg">
 
 
@@ -309,6 +309,28 @@
           </span>
 
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -321,6 +343,10 @@
 
           
 
+          
+              <div class="post-description">
+                  OpenGL学习笔记 5
+              </div>
           
 
         </div>
@@ -336,11 +362,7 @@
       
 
       
-        <p class="description"></p>
-
-<p><img src="" class="img-topic"></p>
-<p><br></p>
-<h1 id="实现一个能自由移动的摄像机"><a href="#实现一个能自由移动的摄像机" class="headerlink" title="实现一个能自由移动的摄像机"></a>实现一个能自由移动的摄像机</h1><h2 id="摄像机矩阵（观察矩阵）"><a href="#摄像机矩阵（观察矩阵）" class="headerlink" title="摄像机矩阵（观察矩阵）"></a>摄像机矩阵（观察矩阵）</h2><p>对OpenGL有基本概念的同学应该都知道，为了将物体的自己的坐标转换为手机屏幕上的坐标，需要经过几个空间的变换。</p>
+        <h1 id="实现一个能自由移动的摄像机"><a href="#实现一个能自由移动的摄像机" class="headerlink" title="实现一个能自由移动的摄像机"></a>实现一个能自由移动的摄像机</h1><h2 id="摄像机矩阵（观察矩阵）"><a href="#摄像机矩阵（观察矩阵）" class="headerlink" title="摄像机矩阵（观察矩阵）"></a>摄像机矩阵（观察矩阵）</h2><p>对OpenGL有基本概念的同学应该都知道，为了将物体的自己的坐标转换为手机屏幕上的坐标，需要经过几个空间的变换。</p>
 <ul>
 <li><strong>局部空间（或者被称为物体控件）</strong><br>  在该空间下，所有的坐标都是相对于自身而言，坐标系原点可能位于物体中心。</li>
 <li><strong>世界空间</strong><br>  我们在世界空间里指定了一个原点，通过<strong>模型矩阵</strong>，将局部空间中的坐标转换到世界坐标，俗话说就是将我们的物体摆在世界中，这时物体的坐标就是相对于世界坐标系原点的坐标。</li>
@@ -394,6 +416,12 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/OpenGL/" rel="tag"># OpenGL</a>
+          
+        </div>
       
 
       
@@ -493,7 +521,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -515,7 +543,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">标签</span>
                 
               </div>

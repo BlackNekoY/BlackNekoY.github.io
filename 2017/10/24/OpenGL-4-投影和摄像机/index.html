@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="a,b,c">
+  <meta name="keywords" content="OpenGL,">
 
 
 
@@ -79,13 +79,13 @@
 
 
 
-<meta name="description" content="OpenGL入门(4) - 投影和摄像机1.OpenGL中的摄像机、视景体、近平面OpenGL的摄像机和现实世界中的人眼很相似，都有一个三维的坐标表示位置，眼睛的朝向和视野范围，位置和眼睛朝向不同，所观察到的物体的形态就会有所不同，视野范围则规定了只有在该范围的物体才会进入人的视线，超出视野范围的部分就无法被观察到(人总不可能观察到耳朵两边和后脑勺的物体吧。)所以，在OpenGL中的摄像机">
-<meta name="keywords" content="a,b,c">
+<meta name="description" content="OpenGL学习笔记 4">
+<meta name="keywords" content="OpenGL">
 <meta property="og:type" content="article">
 <meta property="og:title" content="OpenGL(4) - 投影和摄像机">
 <meta property="og:url" content="http://yoursite.com/2017/10/24/OpenGL-4-投影和摄像机/index.html">
 <meta property="og:site_name" content="Slim&#39;s Blog">
-<meta property="og:description" content="OpenGL入门(4) - 投影和摄像机1.OpenGL中的摄像机、视景体、近平面OpenGL的摄像机和现实世界中的人眼很相似，都有一个三维的坐标表示位置，眼睛的朝向和视野范围，位置和眼睛朝向不同，所观察到的物体的形态就会有所不同，视野范围则规定了只有在该范围的物体才会进入人的视线，超出视野范围的部分就无法被观察到(人总不可能观察到耳朵两边和后脑勺的物体吧。)所以，在OpenGL中的摄像机">
+<meta property="og:description" content="OpenGL学习笔记 4">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2017/10/24/OpenGL-4-投影和摄像机/投影1.png">
 <meta property="og:image" content="http://yoursite.com/2017/10/24/OpenGL-4-投影和摄像机/视点方向看近平面.png?r=61">
@@ -95,10 +95,10 @@
 <meta property="og:image" content="http://yoursite.com/2017/10/24/OpenGL-4-投影和摄像机/投影坐标系.png">
 <meta property="og:image" content="http://yoursite.com/2017/10/24/OpenGL-4-投影和摄像机/up向量为Y轴正方向.png">
 <meta property="og:image" content="http://yoursite.com/2017/10/24/OpenGL-4-投影和摄像机/up方向为X轴正方向.png">
-<meta property="og:updated_time" content="2019-01-24T10:13:33.817Z">
+<meta property="og:updated_time" content="2019-01-24T13:26:11.647Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="OpenGL(4) - 投影和摄像机">
-<meta name="twitter:description" content="OpenGL入门(4) - 投影和摄像机1.OpenGL中的摄像机、视景体、近平面OpenGL的摄像机和现实世界中的人眼很相似，都有一个三维的坐标表示位置，眼睛的朝向和视野范围，位置和眼睛朝向不同，所观察到的物体的形态就会有所不同，视野范围则规定了只有在该范围的物体才会进入人的视线，超出视野范围的部分就无法被观察到(人总不可能观察到耳朵两边和后脑勺的物体吧。)所以，在OpenGL中的摄像机">
+<meta name="twitter:description" content="OpenGL学习笔记 4">
 <meta name="twitter:image" content="http://yoursite.com/2017/10/24/OpenGL-4-投影和摄像机/投影1.png">
 
 
@@ -312,6 +312,28 @@
           </span>
 
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -324,6 +346,10 @@
 
           
 
+          
+              <div class="post-description">
+                  OpenGL学习笔记 4
+              </div>
           
 
         </div>
@@ -339,11 +365,7 @@
       
 
       
-        <p class="description"></p>
-
-<p><img src="" class="img-topic"></p>
-<p><br></p>
-<h1 id="OpenGL入门-4-投影和摄像机"><a href="#OpenGL入门-4-投影和摄像机" class="headerlink" title="OpenGL入门(4) - 投影和摄像机"></a>OpenGL入门(4) - 投影和摄像机</h1><h2 id="1-OpenGL中的摄像机、视景体、近平面"><a href="#1-OpenGL中的摄像机、视景体、近平面" class="headerlink" title="1.OpenGL中的摄像机、视景体、近平面"></a>1.OpenGL中的摄像机、视景体、近平面</h2><p>OpenGL的摄像机和现实世界中的人眼很相似，都有一个三维的坐标表示位置，眼睛的朝向和视野范围，位置和眼睛朝向不同，所观察到的物体的形态就会有所不同，视野范围则规定了只有在该范围的物体才会进入人的视线，超出视野范围的部分就无法被观察到(人总不可能观察到耳朵两边和后脑勺的物体吧。)<br>所以，在OpenGL中的摄像机看来，是这样观察物体的：</p>
+        <h1 id="OpenGL入门-4-投影和摄像机"><a href="#OpenGL入门-4-投影和摄像机" class="headerlink" title="OpenGL入门(4) - 投影和摄像机"></a>OpenGL入门(4) - 投影和摄像机</h1><h2 id="1-OpenGL中的摄像机、视景体、近平面"><a href="#1-OpenGL中的摄像机、视景体、近平面" class="headerlink" title="1.OpenGL中的摄像机、视景体、近平面"></a>1.OpenGL中的摄像机、视景体、近平面</h2><p>OpenGL的摄像机和现实世界中的人眼很相似，都有一个三维的坐标表示位置，眼睛的朝向和视野范围，位置和眼睛朝向不同，所观察到的物体的形态就会有所不同，视野范围则规定了只有在该范围的物体才会进入人的视线，超出视野范围的部分就无法被观察到(人总不可能观察到耳朵两边和后脑勺的物体吧。)<br>所以，在OpenGL中的摄像机看来，是这样观察物体的：</p>
 <p><img src="/2017/10/24/OpenGL-4-投影和摄像机/投影1.png" alt=""><br>摄像机视角看近平面：</p>
 <p><img src="/2017/10/24/OpenGL-4-投影和摄像机/视点方向看近平面.png?r=61" alt=""></p>
 <p>left、right、bottom、top四条边规定了近平面的大小，near为近平面距离摄像机坐标的距离，far为远平面距离摄像机的距离，这六个变量围成的立方体就是摄像机的可视范围：视景体，物体只有在视景体里面的部分才会被显示出来投影到近平面上。该图为透视投影的案例，投影在近平面的影像会产生近大远小的效果。</p>
@@ -400,6 +422,12 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/OpenGL/" rel="tag"># OpenGL</a>
+          
+        </div>
       
 
       
@@ -499,7 +527,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -521,7 +549,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">标签</span>
                 
               </div>

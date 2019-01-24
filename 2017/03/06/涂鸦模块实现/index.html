@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="a,b,c">
+  <meta name="keywords" content="Android,">
 
 
 
@@ -79,13 +79,13 @@
 
 
 
-<meta name="description" content="需求 添加文字，文字可以拖动缩放旋转 添加多个表情，表情可以拖动缩放旋转 添加涂鸦，用手指在屏幕上画出形状，支持撤销和换色  最终效果 整体设计和代码实现如何实现需求，这里了采取一个View承载多个Layer的方法：  Layer：逻辑上的“层”，一个层独立负责一个涂鸦类型，比如需求说的：文字层，表情层和涂鸦层。Layer最重要的三个方法：  12345678//当一个ACTION_DOW">
-<meta name="keywords" content="a,b,c">
+<meta name="description" content="一个独立的涂鸦板组件，支持手势操作。">
+<meta name="keywords" content="Android">
 <meta property="og:type" content="article">
 <meta property="og:title" content="涂鸦模块实现">
 <meta property="og:url" content="http://yoursite.com/2017/03/06/涂鸦模块实现/index.html">
 <meta property="og:site_name" content="Slim&#39;s Blog">
-<meta property="og:description" content="需求 添加文字，文字可以拖动缩放旋转 添加多个表情，表情可以拖动缩放旋转 添加涂鸦，用手指在屏幕上画出形状，支持撤销和换色  最终效果 整体设计和代码实现如何实现需求，这里了采取一个View承载多个Layer的方法：  Layer：逻辑上的“层”，一个层独立负责一个涂鸦类型，比如需求说的：文字层，表情层和涂鸦层。Layer最重要的三个方法：  12345678//当一个ACTION_DOW">
+<meta property="og:description" content="一个独立的涂鸦板组件，支持手势操作。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2017/03/06/涂鸦模块实现/2019-01-24-20-49-27.png">
 <meta property="og:image" content="http://yoursite.com/2017/03/06/涂鸦模块实现/2019-01-24-20-24-10.png">
@@ -94,10 +94,10 @@
 <meta property="og:image" content="http://yoursite.com/2017/03/06/涂鸦模块实现/2019-01-24-20-45-09.png">
 <meta property="og:image" content="http://yoursite.com/2017/03/06/涂鸦模块实现/2019-01-24-20-45-24.png">
 <meta property="og:image" content="http://yoursite.com/2017/03/06/涂鸦模块实现/2019-01-24-20-46-10.png">
-<meta property="og:updated_time" content="2019-01-24T12:53:53.723Z">
+<meta property="og:updated_time" content="2019-01-24T13:22:49.850Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="涂鸦模块实现">
-<meta name="twitter:description" content="需求 添加文字，文字可以拖动缩放旋转 添加多个表情，表情可以拖动缩放旋转 添加涂鸦，用手指在屏幕上画出形状，支持撤销和换色  最终效果 整体设计和代码实现如何实现需求，这里了采取一个View承载多个Layer的方法：  Layer：逻辑上的“层”，一个层独立负责一个涂鸦类型，比如需求说的：文字层，表情层和涂鸦层。Layer最重要的三个方法：  12345678//当一个ACTION_DOW">
+<meta name="twitter:description" content="一个独立的涂鸦板组件，支持手势操作。">
 <meta name="twitter:image" content="http://yoursite.com/2017/03/06/涂鸦模块实现/2019-01-24-20-49-27.png">
 
 
@@ -311,6 +311,28 @@
           </span>
 
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -323,6 +345,10 @@
 
           
 
+          
+              <div class="post-description">
+                  一个独立的涂鸦板组件，支持手势操作。
+              </div>
           
 
         </div>
@@ -338,11 +364,7 @@
       
 
       
-        <p class="description"></p>
-
-<p><img src="" class="img-topic"></p>
-<p><br></p>
-<h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><ul>
+        <h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><ul>
 <li>添加文字，文字可以拖动缩放旋转</li>
 <li>添加多个表情，表情可以拖动缩放旋转</li>
 <li>添加涂鸦，用手指在屏幕上画出形状，支持撤销和换色</li>
@@ -428,6 +450,12 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android/" rel="tag"># Android</a>
+          
+        </div>
       
 
       
@@ -523,7 +551,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -545,7 +573,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">标签</span>
                 
               </div>
